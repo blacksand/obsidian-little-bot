@@ -1,0 +1,54 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 项目依赖包管理规范
+
+## Critical Rules
+
+- 所有命令必须使用 `pnpm` 而非 `npm` 或 `yarn`
+- 对于一次性命令，使用 `pnpm dlx` 代替 `npx`（例如：`pnpm dlx nx g @nx/js:lib` 而非 `npx nx g @nx/js:lib`）
+- 在 package.json 中添加依赖时，依赖版本必须使用 `catalog:dev` 语法（例如：`"tailwindcss": "catalog:dev"`）
+- 在 workspace 根目录的 pnpm-workspace.yaml 的 catalogs.dev 部分管理所有包的版本
+- 开发依赖必须添加到 devDependencies 而非 dependencies
+- 为每个工作区包创建单独的 package.json 文件，并正确设置 name 字段（例如：`@peaks/config-tailwind`）
+- 工作区包之间的依赖关系使用 `workspace:*` 声明（例如：`"@peaks/config-eslint": "workspace:*"`）
+- 禁止在命令中使用 `--force` 或 `-f` 标志，除非绝对必要
+- 当需要全局安装包时，使用 `pnpm add -g` 而非其他方式
+
+## Examples
+
+<example>
+# 创建新包
+pnpm dlx nx g @nx/js:lib packages/config-tailwind --publishable --importPath=@peaks/config-tailwind
+
+# 安装依赖
+pnpm add -D tailwindcss@catalog:dev
+
+# package.json 中的依赖声明
+{
+  "devDependencies": {
+    "tailwindcss": "catalog:dev",
+    "@peaks/config-eslint": "workspace:*"
+  }
+}
+
+# 运行 NX 命令
+pnpm dlx nx build config-tailwind
+</example>
+
+<example type="invalid">
+# 使用 npx 而非 pnpm dlx
+npx nx g @nx/js:lib my-lib
+
+# 依赖版本直接指定确切版本号而非使用 catalog
+{
+  "devDependencies": {
+    "tailwindcss": "^4.1.11"
+  }
+}
+
+# 使用 npm 而非 pnpm
+npm install
+</example>

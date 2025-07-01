@@ -1,6 +1,16 @@
 {
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
-  "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./apps/little-bot"
+    },
+    {
+      "path": "./packages/config-eslint"
+    },
+    {
+      "path": "./tsconfig.eslint.json"
+    }
+  ],
+  "files": []
 }

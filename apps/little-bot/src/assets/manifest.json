@@ -1,0 +1,11 @@
+{
+  "id": "little-bot",
+  "name": "Little Bot",
+  "version": "0.0.1",
+  "minAppVersion": "0.15.0",
+  "description": "A little bot to help you manage your knowledge base with AI.",
+  "author": "Little Bot",
+  "authorUrl": "",
+  "fundingUrl": "",
+  "isDesktopOnly": false
+}

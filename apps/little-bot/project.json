@@ -1,0 +1,69 @@
+{
+  "name": "@peaks/little-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/little-bot/src",
+  "tags": [
+    "scope:app",
+    "type:app"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/little-bot",
+        "outfile": "main.js",
+        "declaration": false,
+        "format": [
+          "cjs"
+        ],
+        "bundle": true,
+        "main": "apps/little-bot/src/main.ts",
+        "tsConfig": "apps/little-bot/tsconfig.app.json",
+        "deleteOutputPath": false,
+        "assets": [
+          {
+            "input": "apps/little-bot/src/assets",
+            "glob": "manifest.json",
+            "output": ""
+          }
+        ],
+        "esbuildConfig": "apps/little-bot/esbuild.config.cjs"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": [
+        "build"
+      ],
+      "options": {
+        "buildTarget": "@peaks/little-bot:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "@peaks/little-bot:build:development"
+        },
+        "production": {
+          "buildTarget": "@peaks/little-bot:build:production"
+        }
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

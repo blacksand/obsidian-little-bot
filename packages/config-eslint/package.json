@@ -1,0 +1,34 @@
+{
+  "name": "@peaks/config-eslint",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "peerDependencies": {
+    "tailwindcss": "^4.1.11"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@eslint-react/eslint-plugin": "catalog:dev",
+    "eslint-flat-config-utils": "catalog:dev",
+    "eslint-plugin-better-tailwindcss": "catalog:dev",
+    "eslint-plugin-jsx-a11y": "catalog:dev",
+    "eslint-plugin-promise": "catalog:dev",
+    "eslint-plugin-unicorn": "catalog:dev"
+  },
+  "nx": {
+    "tags": [
+      "type:util",
+      "scope:shared"
+    ]
+  }
+}
