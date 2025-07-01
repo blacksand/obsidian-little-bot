@@ -1,6 +1,6 @@
 ---
 description: This rule governs the process of committing and pushing changes to git repositories. It should be applied whenever: (1) The user indicates they want to commit or push changes, (2) The user asks about git commit conventions, (3) The user wants to update or save their work to git, or (4) Any git-related commit and push operations are requested. The rule ensures consistent commit message formatting, proper change documentation, and maintainable git history. It's particularly important for maintaining clear project history, facilitating code reviews, and ensuring proper documentation of changes. This rule helps maintain high-quality commit messages that explain both what changed and why, making it easier for both humans and AI to understand the project's evolution.
-globs: 
+globs:
 alwaysApply: false
 ---
 # Git Commit and Push Conventions
@@ -43,4 +43,4 @@ uses bcrypt for password hashing and includes proper token expiration handling.
 updated stuff
 
 fixed some bugs and added features
-</example> 
+</example>

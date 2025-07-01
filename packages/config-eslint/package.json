@@ -1,5 +1,6 @@
 {
   "name": "@peaks/config-eslint",
+  "type": "module",
   "version": "0.0.1",
   "private": true,
   "exports": {
@@ -15,12 +16,12 @@
       "optional": true
     }
   },
-  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
     "@eslint-react/eslint-plugin": "catalog:dev",
     "eslint-flat-config-utils": "catalog:dev",
     "eslint-plugin-better-tailwindcss": "catalog:dev",
+    "eslint-plugin-format": "catalog:dev",
     "eslint-plugin-jsx-a11y": "catalog:dev",
     "eslint-plugin-promise": "catalog:dev",
     "eslint-plugin-unicorn": "catalog:dev"

@@ -1,5 +1,6 @@
 {
   "name": "@peaks/workspace",
+  "type": "module",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
