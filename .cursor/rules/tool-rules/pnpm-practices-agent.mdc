@@ -1,5 +1,5 @@
 ---
-description:
+description: 此规范描述如何使用 pnpm 代替 npm 对项目工作区 workspace 进行管理的相关内容
 globs:
 alwaysApply: false
 ---

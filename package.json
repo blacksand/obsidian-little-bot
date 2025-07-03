@@ -21,6 +21,7 @@
     "@nx/jest": "21.2.1",
     "@nx/js": "21.2.1",
     "@nx/node": "21.2.1",
+    "@nx/plugin": "21.2.1",
     "@peaks/config-eslint": "workspace:*",
     "@swc-node/register": "catalog:dev",
     "@swc/core": "catalog:dev",
