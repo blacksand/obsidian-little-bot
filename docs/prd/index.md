@@ -1,0 +1,21 @@
+# Little Bot Product Requirements Document (PRD)
+
+## Table of Contents
+
+- [Little Bot Product Requirements Document (PRD)](#table-of-contents)
+  - [Goals and Background Context](./goals-and-background-context.md)
+  - [Requirements](./requirements.md)
+    - [Functional](./requirements.md#functional)
+    - [Non Functional](./requirements.md#non-functional)
+  - [Epics](./epics.md)
+    - [High-Level Epic Structure](./epics.md#high-level-epic-structure)
+  - [Epic 1: Core Engine and Basic Commands](./epic-1-core-engine-and-basic-commands.md)
+    - [Story 1.1 Loading and Parsing Note-Based Command Templates](./epic-1-core-engine-and-basic-commands.md#story-11-loading-and-parsing-note-based-command-templates)
+    - [Story 1.2 Implementing the "Insert Date" Command Executor](./epic-1-core-engine-and-basic-commands.md#story-12-implementing-the-insert-date-command-executor)
+    - [Story 1.3 Connecting the Core Intent Engine with Individual Commands](./epic-1-core-engine-and-basic-commands.md#story-13-connecting-the-core-intent-engine-with-individual-commands)
+  - [Epic 2: Interactive Commands and User Feedback](./epic-2-interactive-commands-and-user-feedback.md)
+    - [Story 2.1 Implementing the Parameter Extraction Engine](./epic-2-interactive-commands-and-user-feedback.md#story-21-implementing-the-parameter-extraction-engine)
+    - [Story 2.2 Implementing Smart Parameter Handling (Default Values and Interactive Prompts)](./epic-2-interactive-commands-and-user-feedback.md#story-22-implementing-smart-parameter-handling-default-values-and-interactive-prompts)
+    - [Story 2.3 Implementing 'Open Note' and 'Search Note' Commands](./epic-2-interactive-commands-and-user-feedback.md#story-23-implementing-open-note-and-search-note-commands)
+    - [Story 2.4 Implementing User-Friendly Error Feedback](./epic-2-interactive-commands-and-user-feedback.md#story-24-implementing-user-friendly-error-feedback)
+  - [Checklist Results Report](./checklist-results-report.md)
