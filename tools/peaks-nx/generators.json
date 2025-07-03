@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "library-js": {
+      "factory": "./src/generators/library-js/generator",
+      "schema": "./src/generators/library-js/schema.json",
+      "description": "library-js generator"
+    },
+    "library-react": {
+      "factory": "./src/generators/library-react/generator",
+      "schema": "./src/generators/library-react/schema.json",
+      "description": "library-react generator"
+    }
+  }
+}

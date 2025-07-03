@@ -8,7 +8,7 @@
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.mjs",
+      "!{projectRoot}/eslint.config.ts",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
@@ -27,7 +27,10 @@
         "typecheck": {
           "targetName": "typecheck"
         }
-      }
+      },
+      "exclude": [
+        "tools/peaks-nx/*"
+      ]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -39,6 +42,21 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
+      }
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "include": [
+        "tools/peaks-nx/*"
+      ],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json"
+        }
       }
     }
   ],
@@ -56,6 +74,23 @@
     "test": {
       "dependsOn": [
         "^build"
+      ]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
       ]
     }
   }

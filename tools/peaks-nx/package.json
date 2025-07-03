@@ -1,0 +1,20 @@
+{
+  "name": "@peaks/nx",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "!**/*.tsbuildinfo",
+    "dist",
+    "generators.json"
+  ],
+  "dependencies": {
+    "@nx/devkit": "catalog:",
+    "tslib": "catalog:"
+  },
+  "generators": "./generators.json"
+}

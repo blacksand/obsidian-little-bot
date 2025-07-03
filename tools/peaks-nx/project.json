@@ -1,0 +1,44 @@
+{
+  "name": "peaks-nx",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "tools/peaks-nx/dist",
+        "main": "tools/peaks-nx/src/index.ts",
+        "tsConfig": "tools/peaks-nx/tsconfig.lib.json",
+        "rootDir": "tools/peaks-nx/src",
+        "generatePackageJson": false,
+        "assets": [
+          {
+            "input": "./tools/peaks-nx/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./tools/peaks-nx/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./tools/peaks-nx",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./tools/peaks-nx",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "sourceRoot": "tools/peaks-nx/src",
+  "projectType": "library",
+  "tags": []
+}
