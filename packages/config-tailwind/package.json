@@ -1,0 +1,15 @@
+{
+  "name": "@peaks/config-tailwind",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": ["./styles/**/*.css"],
+  "files": [
+    "./package.json",
+    "src/styles/little-bot.css",
+    "src/styles/storybook.css"
+  ],
+  "devDependencies": {
+    "tailwindcss": "catalog:dev"
+  }
+}
