@@ -1,5 +1,7 @@
 import type { OptionsConfig, TypedFlatConfigItem } from '@antfu/eslint-config'
 
+export { type FlatConfigComposer } from 'eslint-flat-config-utils'
+
 type BaseOptions = OptionsConfig & Omit<TypedFlatConfigItem, 'files'>
 
 interface ExtraOptions {

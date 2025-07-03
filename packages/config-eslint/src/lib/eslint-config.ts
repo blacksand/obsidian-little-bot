@@ -1,7 +1,6 @@
 import type { Awaitable, TypedFlatConfigItem } from '@antfu/eslint-config'
 import antfu, { GLOB_TS, GLOB_TSX } from '@antfu/eslint-config'
 import type { Linter } from 'eslint'
-import type { FlatConfigComposer } from 'eslint-flat-config-utils'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -33,7 +32,7 @@ export function eslintConfig(
     ...options
   }: Options = {},
   ...userConfigs: UserConfig[]
-): FlatConfigComposer {
+) {
   const enableReact = !!options.react
   const enableJsx = options.jsx ?? enableReact
 

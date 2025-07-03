@@ -1,6 +1,6 @@
-import { eslintConfig } from '@peaks/config-eslint'
+import { eslintConfig, getProjectRoot } from '@peaks/config-eslint'
 
 export default eslintConfig({
   type: 'app',
-  tailwindcss: false,
+  tailwindcss: `${getProjectRoot(import.meta.url)}/src/styles/global.css`,
 })
