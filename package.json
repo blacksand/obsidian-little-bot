@@ -41,7 +41,7 @@
     "eslint": "catalog:dev",
     "jest": "catalog:dev",
     "jest-environment-node": "catalog:dev",
-    "jiti": "catalog:dev",
+    "jiti": "2.4.2",
     "nx": "21.2.2",
     "ts-jest": "catalog:dev",
     "ts-node": "catalog:dev",

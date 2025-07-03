@@ -12,9 +12,5 @@
     "dist",
     "generators.json"
   ],
-  "dependencies": {
-    "@nx/devkit": "catalog:",
-    "tslib": "catalog:"
-  },
   "generators": "./generators.json"
 }

@@ -80,10 +80,6 @@ function updatePackageJson(tree: Tree, options: NormalizedSchema) {
         './package.json': './package.json',
       },
 
-      scripts: {
-        'check-types': 'tsc -p tsconfig.lib.json --noEmit',
-      },
-
       dependencies: {},
       peerDependencies: {},
     })
