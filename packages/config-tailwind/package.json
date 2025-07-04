@@ -3,12 +3,18 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "sideEffects": ["./styles/**/*.css"],
-  "files": [
-    "./package.json",
-    "src/styles/little-bot.css",
-    "src/styles/storybook.css"
-  ],
+  "sideEffects": ["./src/**/*.css"],
+  "exports": {
+    "./package.json": "./package.json",
+    "./little-bot.css": {
+      "import": "./src/styles/little-bot.css",
+      "require": "./src/styles/little-bot.css"
+    },
+    "./storybook.css": {
+      "import": "./src/styles/storybook.css",
+      "require": "./src/styles/storybook.css"
+    }
+  },
   "nx": {
     "tags": [
       "type:util",
