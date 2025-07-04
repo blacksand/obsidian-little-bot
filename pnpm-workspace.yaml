@@ -42,4 +42,6 @@ catalogs:
 onlyBuiltDependencies:
   - '@swc/core'
   - '@tailwindcss/oxide'
+  - esbuild
+  - msw
   - nx
