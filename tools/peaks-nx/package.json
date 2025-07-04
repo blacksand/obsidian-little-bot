@@ -12,5 +12,11 @@
     "dist",
     "generators.json"
   ],
-  "generators": "./generators.json"
+  "generators": "./generators.json",
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:util"
+    ]
+  }
 }

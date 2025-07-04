@@ -9,7 +9,10 @@
     "src/styles/little-bot.css",
     "src/styles/storybook.css"
   ],
-  "devDependencies": {
-    "tailwindcss": "catalog:dev"
+  "nx": {
+    "tags": [
+      "type:util",
+      "scope:shared"
+    ]
   }
 }
