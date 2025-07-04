@@ -9,9 +9,12 @@ const currentPath = path.dirname(fileURLToPath(import.meta.url))
 export const workspaceRoot = path.resolve(currentPath, '../../../..')
 
 /**
- * vitest config with browser support
+ * Configures a testing environment based on the provided configuration file URL.
+ *
+ * @param {string} configFileUrl - The file URL of the configuration file to set up the testing environment.
+ * @return {import('vitest/config').UserConfigExport} The configuration object generated for the testing environment.
  */
-export function testingConfig(configFileUrl: string) {
+export function testingConfig(configFileUrl) {
   const projectRoot = path.dirname(fileURLToPath(configFileUrl))
   const relativePath = path.relative(workspaceRoot, projectRoot)
 
