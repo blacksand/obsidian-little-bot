@@ -6,14 +6,8 @@
   "sideEffects": ["./src/**/*.css"],
   "exports": {
     "./package.json": "./package.json",
-    "./little-bot.css": {
-      "import": "./src/styles/little-bot.css",
-      "require": "./src/styles/little-bot.css"
-    },
-    "./storybook.css": {
-      "import": "./src/styles/storybook.css",
-      "require": "./src/styles/storybook.css"
-    }
+    "./little-bot.css": "./src/styles/little-bot.css",
+    "./storybook.css": "./src/styles/storybook.css"
   },
   "devDependencies": {
     "tw-animate-css": "catalog:dev"
