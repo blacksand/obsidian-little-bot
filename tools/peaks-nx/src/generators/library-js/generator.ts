@@ -67,7 +67,7 @@ function updatePackageJson(tree: Tree, options: NormalizedSchema) {
     tree.write(packageJson, '{}')
   }
 
-  updateJson(tree, packageJson, (incomingJson: Record<string, unknown>) => {
+  updateJson(tree, packageJson, ({ main, types, ...incomingJson }: Record<string, unknown>) => {
     Object.assign(incomingJson, {
       name: options.importPath,
       type: 'module',
@@ -83,6 +83,7 @@ function updatePackageJson(tree: Tree, options: NormalizedSchema) {
       dependencies: {},
       peerDependencies: {},
     })
+
     return incomingJson
   })
 }
