@@ -1,7 +1,7 @@
-export { eslintConfig } from './lib/eslint-config.js'
+export { eslintConfig } from './lib/eslint-config'
 
-export { getProjectRoot } from './lib/utils/get-project-root.js'
-export { getTsconfigPath } from './lib/utils/get-tsconfig-path.js'
+export { getProjectRoot } from './lib/utils/get-project-root'
+export { getTsconfigPath } from './lib/utils/get-tsconfig-path'
 
 export {
   GLOB_ALL_SRC,

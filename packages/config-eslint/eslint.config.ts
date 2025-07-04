@@ -1,4 +1,4 @@
-import { eslintConfig, getProjectRoot } from './src/index.js'
+import { eslintConfig, getProjectRoot } from './src'
 
 export default eslintConfig({
   type: 'lib',

@@ -2,20 +2,33 @@
   "compilerOptions": {
     "composite": true,
     "target": "es2022",
-    "lib": ["es2022"],
-    "customConditions": ["development"],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
+    "moduleDetection": "force",
+    "customConditions": [
+      "development"
+    ],
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowJs": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "importHelpers": true,
-    "noEmitOnError": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   }
 }

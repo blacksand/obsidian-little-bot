@@ -1,6 +1,6 @@
 import type { Tree } from '@nx/devkit'
 import { formatFiles, readProjectConfiguration, updateJson, updateProjectConfiguration } from '@nx/devkit'
-import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils.js'
+import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils'
 import { libraryGenerator } from '@nx/js'
 
 type LibJsGeneratorSchema = Parameters<typeof libraryGenerator>[1]
