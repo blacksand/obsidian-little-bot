@@ -3,11 +3,15 @@
     "library-js": {
       "factory": "./src/generators/library-js/generator",
       "schema": "./src/generators/library-js/schema.json",
+      "aliases": ["lib-js"],
+      "x-type": "library",
       "description": "library-js generator"
     },
     "library-ui": {
       "factory": "./src/generators/library-ui/generator",
       "schema": "./src/generators/library-ui/schema.json",
+      "aliases": ["lib-ui"],
+      "x-type": "library",
       "description": "library-ui generator"
     }
   }
