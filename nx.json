@@ -108,7 +108,7 @@
         "skipTsConfig": false,
         "unitTestRunner": "vitest"
       },
-      "library-react": {
+      "library-ui": {
         "bundler": "none",
         "linter": "eslint",
         "style": "css",

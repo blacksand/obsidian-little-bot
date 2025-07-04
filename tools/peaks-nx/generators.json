@@ -5,10 +5,10 @@
       "schema": "./src/generators/library-js/schema.json",
       "description": "library-js generator"
     },
-    "library-react": {
-      "factory": "./src/generators/library-react/generator",
-      "schema": "./src/generators/library-react/schema.json",
-      "description": "library-react generator"
+    "library-ui": {
+      "factory": "./src/generators/library-ui/generator",
+      "schema": "./src/generators/library-ui/schema.json",
+      "description": "library-ui generator"
     }
   }
 }
