@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from './button'
-// import { within } from '@storybook/testing-library';
-// import { expect } from '@storybook/react-vite';
 
 const meta: Meta<typeof Button> = {
   title: 'Button',
@@ -30,23 +28,3 @@ export const Primary: Story = {
     variant: 'default',
   },
 }
-//
-// export const Secondary: Story = {
-//   args: {
-//     children: 'Button',
-//     disabled: false,
-//     variant: 'secondary',
-//   },
-// }
-
-// export const Heading: Story = {
-//   args: {
-//     text: '',
-//     padding: 0,
-//     disabled: false,
-//   },
-//   play: async ({ canvasElement }) => {
-//     const canvas = within(canvasElement);
-//     expect(canvas.getByText(/Welcome to Button!/gi)).toBeTruthy();
-//   },
-// };
