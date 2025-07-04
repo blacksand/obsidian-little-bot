@@ -6,6 +6,11 @@ import { cn } from '@peaks/ui/utils'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog'
 
+/**
+ * Base Command component that provides a container for command palette functionality
+ * @param props - React component props extending CommandPrimitive properties
+ * @param props.className - Additional CSS classes to apply to the command container
+ */
 function Command({
   className,
   ...props
@@ -22,6 +27,15 @@ function Command({
   )
 }
 
+/**
+ * Dialog wrapper for the Command component with built-in accessibility features
+ * @param props - React component props extending Dialog properties
+ * @param props.title - Dialog title text (defaults to 'Command Palette')
+ * @param props.children - Child components to render within the command dialog
+ * @param props.className - Additional CSS classes to apply to the dialog content
+ * @param props.description - Dialog description text (defaults to 'Search for a command to run...')
+ * @param props.showCloseButton - Whether to show the close button (defaults to true)
+ */
 function CommandDialog({
   title = 'Command Palette',
   children,
@@ -65,6 +79,11 @@ function CommandDialog({
   )
 }
 
+/**
+ * Input component for the command palette with search icon
+ * @param props - React component props extending CommandPrimitive.Input properties
+ * @param props.className - Additional CSS classes to apply to the input element
+ */
 function CommandInput({
   className,
   ...props
@@ -91,6 +110,11 @@ function CommandInput({
   )
 }
 
+/**
+ * Container component for command items with scrolling behavior
+ * @param props - React component props extending CommandPrimitive.List properties
+ * @param props.className - Additional CSS classes to apply to the list container
+ */
 function CommandList({
   className,
   ...props
@@ -107,6 +131,10 @@ function CommandList({
   )
 }
 
+/**
+ * Component displayed when no commands match the search criteria
+ * @param props - React component props extending CommandPrimitive.Empty properties
+ */
 function CommandEmpty({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
@@ -119,6 +147,11 @@ function CommandEmpty({
   )
 }
 
+/**
+ * Groups related command items together with an optional heading
+ * @param props - React component props extending CommandPrimitive.Group properties
+ * @param props.className - Additional CSS classes to apply to the group container
+ */
 function CommandGroup({
   className,
   ...props
@@ -140,6 +173,11 @@ function CommandGroup({
   )
 }
 
+/**
+ * Visual separator between command groups or items
+ * @param props - React component props extending CommandPrimitive.Separator properties
+ * @param props.className - Additional CSS classes to apply to the separator
+ */
 function CommandSeparator({
   className,
   ...props
@@ -153,6 +191,11 @@ function CommandSeparator({
   )
 }
 
+/**
+ * Individual command item that can be selected and triggered
+ * @param props - React component props extending CommandPrimitive.Item properties
+ * @param props.className - Additional CSS classes to apply to the item
+ */
 function CommandItem({
   className,
   ...props
@@ -177,6 +220,11 @@ function CommandItem({
   )
 }
 
+/**
+ * Displays keyboard shortcut hints for command items
+ * @param props - React component props extending HTML span element properties
+ * @param props.className - Additional CSS classes to apply to the shortcut text
+ */
 function CommandShortcut({
   className,
   ...props

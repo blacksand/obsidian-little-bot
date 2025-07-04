@@ -1,0 +1,17 @@
+{
+  "name": "@peaks/storybook",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@peaks/config-tailwind": "workspace:*",
+    "@peaks/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-themes": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:dev"
+  }
+}
