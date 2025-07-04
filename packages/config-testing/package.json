@@ -5,8 +5,14 @@
   "private": true,
   "sideEffects": false,
   "exports": {
-    "./browser": "./src/lib/browser.ts",
-    "./node": "./src/lib/node.ts",
+    "./browser": {
+      "types": "./src/lib/browser.d.ts",
+      "import": "./src/lib/browser.js"
+    },
+    "./node": {
+      "types": "./src/lib/node.d.ts",
+      "import": "./src/lib/node.js"
+    },
     "./package.json": "./package.json"
   },
   "nx": {
