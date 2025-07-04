@@ -15,6 +15,9 @@
       "require": "./src/styles/storybook.css"
     }
   },
+  "devDependencies": {
+    "tw-animate-css": "catalog:dev"
+  },
   "nx": {
     "tags": [
       "type:util",

@@ -76,11 +76,6 @@
         "^production"
       ]
     },
-    "test": {
-      "dependsOn": [
-        "^build"
-      ]
-    },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": [
@@ -96,6 +91,11 @@
       "inputs": [
         "default",
         "^production"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
       ]
     }
   },

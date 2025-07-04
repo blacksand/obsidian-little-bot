@@ -9,6 +9,7 @@
     "clean": "nx reset",
     "dev": "nx serve little-bot",
     "lint": "nx run-many --target=lint",
+    "shadcn": "nx run @peaks/ui:shadcn",
     "start": "nx serve little-bot -c production",
     "test": "nx run-many --target=test",
     "typecheck": "nx run-many --target=typecheck"

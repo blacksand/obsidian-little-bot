@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "baseColor": "neutral",
+    "config": "",
+    "css": "@peaks/config-tailwind/litter-bot.css",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@peaks/ui",
+    "hooks": "@peaks/ui/hooks",
+    "lib": "@peaks/utils",
+    "ui": "src/lib/components",
+    "utils": "@peaks/ui/utils"
+  },
+  "iconLibrary": "lucide"
+}
