@@ -111,7 +111,7 @@
       "enum": ["workspace", "project", "npm-scripts"],
       "description": "Determines whether the project's executors should be configured in `workspace.json`, `project.json` or as npm scripts.",
       "x-priority": "internal",
-      "default": "project"
+      "default": "npm-scripts"
     },
     "compiler": {
       "type": "string",
@@ -137,7 +137,8 @@
     },
     "useProjectJson": {
       "type": "boolean",
-      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file."
+      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file.",
+      "default": false
     }
   },
   "required": ["directory"],

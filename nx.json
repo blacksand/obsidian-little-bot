@@ -39,9 +39,14 @@
       }
     },
     {
-      "plugin": "@nx/jest/plugin",
+      "plugin": "@nx/vite/plugin",
       "options": {
-        "targetName": "test"
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck"
       }
     },
     {
@@ -92,6 +97,25 @@
         "default",
         "^production"
       ]
+    }
+  },
+  "generators": {
+    "@peaks/nx": {
+      "library-js": {
+        "bundler": "none",
+        "linter": "eslint",
+        "skipPackageJson": true,
+        "skipTsConfig": false,
+        "unitTestRunner": "vitest"
+      },
+      "library-react": {
+        "bundler": "none",
+        "linter": "eslint",
+        "style": "css",
+        "skipPackageJson": true,
+        "skipTsConfig": false,
+        "unitTestRunner": "vitest"
+      }
     }
   }
 }

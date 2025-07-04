@@ -178,7 +178,7 @@
     "skipPackageJson": {
       "description": "Do not add dependencies to `package.json`.",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "x-priority": "internal"
     },
     "minimal": {
@@ -193,7 +193,8 @@
     },
     "useProjectJson": {
       "type": "boolean",
-      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file."
+      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file.",
+      "default": false
     }
   },
   "required": ["directory"]

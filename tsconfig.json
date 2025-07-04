@@ -2,12 +2,27 @@
   "compileOnSave": false,
   "extends": "./tsconfig.base.json",
   "references": [
-    { "path": "./apps/little-bot" },
-    { "path": "./tsconfig.eslint.json" },
-    { "path": "./tools/peaks-nx" },
-
-    { "path": "./packages/config-eslint" },
-    { "path": "./packages/config-tailwind" }
+    {
+      "path": "./apps/little-bot"
+    },
+    {
+      "path": "./tsconfig.eslint.json"
+    },
+    {
+      "path": "./tools/peaks-nx"
+    },
+    {
+      "path": "./packages/config-eslint"
+    },
+    {
+      "path": "./packages/config-tailwind"
+    },
+    {
+      "path": "./packages/config-testing"
+    },
+    {
+      "path": "./packages/ui"
+    }
   ],
   "files": []
 }
