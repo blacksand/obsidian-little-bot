@@ -15,7 +15,7 @@ import {
 } from './command'
 
 const meta = {
-  title: 'Components/Command',
+  title: 'components/shadcn-ui/Command',
   component: Command,
   subcomponents: {
     Command,

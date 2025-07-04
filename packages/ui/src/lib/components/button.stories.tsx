@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from './button'
 
 const meta: Meta<typeof Button> = {
-  title: 'Button',
+  title: 'components/shadcn-ui/Button',
   component: Button,
   tags: ['autodocs', '!dev'],
 

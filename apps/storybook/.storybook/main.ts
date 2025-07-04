@@ -19,7 +19,7 @@ const config: StorybookConfig = {
   },
   stories: [
     `${uiLibrary}/src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))`,
-    '../src/lib/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
+    // '../src/lib/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
 
   addons: [
