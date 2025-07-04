@@ -9,20 +9,37 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "peerDependencies": {
-    "tailwindcss": "^4.1.11"
+    "@eslint-react/eslint-plugin": "catalog:dev",
+    "eslint-plugin-better-tailwindcss": "catalog:dev",
+    "eslint-plugin-jsx-a11y": "catalog:dev",
+    "eslint-plugin-react": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:dev"
   },
   "peerDependenciesMeta": {
-    "tailwindcss": {
+    "@eslint-react/eslint-plugin": {
+      "optional": true
+    },
+    "eslint-plugin-better-tailwindcss": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-react-refresh": {
       "optional": true
     }
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
-    "@eslint-react/eslint-plugin": "catalog:dev",
     "eslint-flat-config-utils": "catalog:dev",
-    "eslint-plugin-better-tailwindcss": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
-    "eslint-plugin-jsx-a11y": "catalog:dev",
     "eslint-plugin-promise": "catalog:dev",
     "eslint-plugin-unicorn": "catalog:dev"
   },

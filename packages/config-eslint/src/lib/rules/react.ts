@@ -61,7 +61,7 @@ export function react({ a11y, typeAware }: { a11y?: boolean, typeAware?: boolean
       //   'react-compiler': reactCompilerPlugin,
       // },
       rules: {
-        'react-compiler/react-compiler': 'warn',
+        // 'react-compiler/react-compiler': 'warn',
 
         'react/no-missing-component-display-name': 'error',
 
