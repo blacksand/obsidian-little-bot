@@ -13,8 +13,6 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
-    env:
-      NODE_OPTIONS: --experimental-strip-types
 
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +34,8 @@ jobs:
 
       # Cache node_modules
       - uses: actions/setup-node@v4
+        env:
+          NODE_OPTIONS: --experimental-strip-types
         with:
           node-version: 22.17.0
           cache: pnpm
