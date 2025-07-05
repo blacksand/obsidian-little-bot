@@ -8,9 +8,10 @@ const preview: Preview = {
   decorators: [
     withThemeByClassName<ReactRenderer>({
       defaultTheme: 'light',
+      parentSelector: 'html,body',
       themes: {
-        dark: 'dark',
-        light: 'light',
+        dark: 'theme-dark',
+        light: 'theme-light',
       },
     }),
   ],
