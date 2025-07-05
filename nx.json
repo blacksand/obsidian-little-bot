@@ -22,7 +22,7 @@
       "{workspaceRoot}/.github/workflows/ci.yml"
     ]
   },
-  "nxCloudId": "686310b817c61a0a6ce5059f",
+  "// nxCloudId": "686310b817c61a0a6ce5059f",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -107,7 +107,7 @@
     },
     "storybook": {
       "options": {
-        "port": 9090
+        "port": 49090
       }
     },
     "test": {
@@ -123,6 +123,7 @@
         "linter": "eslint",
         "skipPackageJson": true,
         "skipTsConfig": false,
+        "useProjectJson": false,
         "unitTestRunner": "vitest"
       },
       "library-ui": {
@@ -131,6 +132,7 @@
         "style": "css",
         "skipPackageJson": true,
         "skipTsConfig": false,
+        "useProjectJson": false,
         "unitTestRunner": "vitest"
       }
     }
