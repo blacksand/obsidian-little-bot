@@ -1,7 +1,7 @@
 {
   "name": "@peaks/storybook",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
+  "projectType": "library",
   "sourceRoot": "apps/storybook/src",
   "tags": [
     "scope:app",
