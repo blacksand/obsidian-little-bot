@@ -25,6 +25,18 @@
     },
     {
       "path": "./apps/storybook"
+    },
+    {
+      "path": "./packages/utils"
+    },
+    {
+      "path": "./packages/obsidian-api"
+    },
+    {
+      "path": "./packages/dataview-api"
+    },
+    {
+      "path": "./packages/dataview-api"
     }
   ],
   "files": []
