@@ -24,7 +24,7 @@
       "description": "The bundler to use. Choosing 'none' means this library is not buildable.",
       "type": "string",
       "enum": ["swc", "tsc", "rollup", "vite", "esbuild", "none"],
-      "default": "none",
+      "default": "tsc",
       "x-prompt": "Which bundler would you like to use to build the library? Choose 'none' to skip build setup.",
       "x-priority": "important"
     },
@@ -32,14 +32,12 @@
       "description": "The tool to use for running lint checks.",
       "type": "string",
       "enum": ["none", "eslint"],
-      "default": "eslint",
       "x-priority": "important"
     },
     "unitTestRunner": {
       "description": "Test runner to use for unit tests.",
       "type": "string",
       "enum": ["none", "jest", "vitest"],
-      "default": "vitest",
       "x-priority": "important"
     },
     "tags": {
@@ -55,7 +53,7 @@
     "skipPackageJson": {
       "description": "Do not add dependencies to `package.json`.",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "x-priority": "internal"
     },
     "skipTsConfig": {
@@ -97,7 +95,7 @@
     },
     "buildable": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Generate a buildable library.",
       "x-deprecated": "Use the `bundler` option for greater control (swc, tsc, rollup, vite, esbuild, none)."
     },
@@ -109,16 +107,15 @@
     "config": {
       "type": "string",
       "enum": ["workspace", "project", "npm-scripts"],
+      "default": "project",
       "description": "Determines whether the project's executors should be configured in `workspace.json`, `project.json` or as npm scripts.",
-      "x-priority": "internal",
-      "default": "npm-scripts"
+      "x-priority": "internal"
     },
     "compiler": {
       "type": "string",
       "enum": ["tsc", "swc"],
       "description": "The compiler used by the build and test targets",
-      "x-deprecated": "Use the `bundler` option for greater control (swc, tsc, rollup, vite, esbuild, none).",
-      "default": "none"
+      "x-deprecated": "Use the `bundler` option for greater control (swc, tsc, rollup, vite, esbuild, none)."
     },
     "skipTypeCheck": {
       "type": "boolean",
@@ -137,8 +134,7 @@
     },
     "useProjectJson": {
       "type": "boolean",
-      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file.",
-      "default": false
+      "description": "Use a `project.json` configuration file instead of inlining the Nx configuration in the `package.json` file."
     }
   },
   "required": ["directory"],

@@ -1,5 +1,5 @@
 import type { Tree } from '@nx/devkit'
-import { formatFiles, readProjectConfiguration, updateJson, updateProjectConfiguration } from '@nx/devkit'
+import { formatFiles, updateJson } from '@nx/devkit'
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils'
 import { libraryGenerator } from '@nx/js'
 
@@ -15,7 +15,7 @@ export async function libJsGenerator(tree: Tree, schema: LibJsGeneratorSchema) {
   const options = await normalizeOptions(tree, schema)
   await libraryGenerator(tree, { ...options, skipFormat: true })
 
-  updateProject(tree, options)
+  // updateProject(tree, options)
   updatePackageJson(tree, options)
   // updateTsConfig(tree, options)
 
@@ -43,19 +43,19 @@ async function normalizeOptions(
   return { ...options, importPath, projectName, projectRoot }
 }
 
-function updateProject(tree: Tree, options: NormalizedSchema) {
-  if (options.bundler !== 'tsc') {
-    return
-  }
-
-  const project = readProjectConfiguration(tree, options.projectName)
-
-  // 移除默认的 tsc build target
-  const { build, ...targets } = project.targets ?? {}
-  project.targets = targets
-
-  updateProjectConfiguration(tree, options.projectName, project)
-}
+// function updateProject(tree: Tree, options: NormalizedSchema) {
+//   if (options.bundler !== 'tsc') {
+//     return
+//   }
+//
+//   const project = readProjectConfiguration(tree, options.projectName)
+//
+//   // 移除默认的 tsc build target
+//   const { build, ...targets } = project.targets ?? {}
+//   project.targets = targets
+//
+//   updateProjectConfiguration(tree, options.projectName, project)
+// }
 
 function updatePackageJson(tree: Tree, options: NormalizedSchema) {
   if (options.bundler !== 'none') {
