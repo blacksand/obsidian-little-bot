@@ -22,15 +22,15 @@ export function nx({ allowedGlobalImport }: NxOptions = {}): Linter.Config[] {
             depConstraints: [
               {
                 sourceTag: 'scope:app',
-                onlyDependOnLibsWithTags: ['scope:shared', 'scope:mobile', 'scope:web'],
+                onlyDependOnLibsWithTags: ['scope:shared', 'scope:desktop', 'scope:mobile'],
+              },
+              {
+                sourceTag: 'scope:desktop',
+                onlyDependOnLibsWithTags: ['scope:shared', 'scope:desktop'],
               },
               {
                 sourceTag: 'scope:mobile',
                 onlyDependOnLibsWithTags: ['scope:shared', 'scope:mobile'],
-              },
-              {
-                sourceTag: 'scope:web',
-                onlyDependOnLibsWithTags: ['scope:shared', 'scope:web'],
               },
               {
                 sourceTag: 'scope:shared',
@@ -38,7 +38,11 @@ export function nx({ allowedGlobalImport }: NxOptions = {}): Linter.Config[] {
               },
               {
                 sourceTag: 'type:app',
-                onlyDependOnLibsWithTags: ['type:ui', 'type:util'],
+                onlyDependOnLibsWithTags: ['type:api', 'type:ui', 'type:util'],
+              },
+              {
+                sourceTag: 'type:api',
+                onlyDependOnLibsWithTags: ['type:api', 'type:util'],
               },
               {
                 sourceTag: 'type:ui',
