@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 
-import { noop } from '../constants/noop'
 import { isObject } from './is-object'
 
 describe('isObject 函数', () => {
@@ -24,8 +23,7 @@ describe('isObject 函数', () => {
   })
 
   it('如果值是一个函数，应返回 false', () => {
-    const value = noop
-    expect(isObject(value)).toBe(false)
+    expect(isObject(() => void 0)).toBe(false)
   })
 
   it('如果值是一个字符串，应返回 false', () => {
