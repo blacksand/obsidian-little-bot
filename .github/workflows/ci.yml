@@ -39,12 +39,10 @@ jobs:
           cache: pnpm
 
       - name: Install packages
-        env:
-          NODE_OPTIONS: --experimental-strip-types
-        run: = pnpm install --frozen-lockfile
+        run: = NODE_OPTIONS='--experimental-strip-types' pnpm install --frozen-lockfile
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+        run: pnpm exec playwright install
 
       - uses: nrwl/nx-set-shas@v4
 
@@ -52,6 +50,4 @@ jobs:
       # - run: pnpm exec nx-cloud record -- echo Hello World
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       - name: Run ci tasks
-        env:
-          NODE_OPTIONS: --experimental-strip-types
-        run: pnpm exec nx affected -t lint test build
+        run: NODE_OPTIONS='--experimental-strip-types' pnpm exec nx affected -t lint test build
