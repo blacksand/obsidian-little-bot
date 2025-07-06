@@ -3,6 +3,8 @@ import { formatFiles, updateJson } from '@nx/devkit'
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils'
 import { libraryGenerator } from '@nx/js'
 
+import type { TsConfigJson } from '../../types/tsconfig-json'
+
 type LibJsGeneratorSchema = Parameters<typeof libraryGenerator>[1]
 
 interface NormalizedSchema extends LibJsGeneratorSchema {
@@ -17,7 +19,7 @@ export async function libJsGenerator(tree: Tree, schema: LibJsGeneratorSchema) {
 
   // updateProject(tree, options)
   updatePackageJson(tree, options)
-  // updateTsConfig(tree, options)
+  updateTsConfig(tree, options)
 
   updateESLintConfig(tree, options)
   updateVitestConfig(tree, options)
@@ -88,36 +90,25 @@ function updatePackageJson(tree: Tree, options: NormalizedSchema) {
   })
 }
 
-// interface TsConfigJson {
-//   compilerOptions: {
-//     module?: string
-//   }
-// }
-
-// function updateTsConfig(tree: Tree, options: NormalizedSchema) {
-//   updateJson(tree, `${options.projectRoot}/tsconfig.json`, (json: TsConfigJson) => {
-//     return {
-//       ...json,
-//       compilerOptions: {
-//         incremental: true,
-//         tsBuildInfoFile: `../../dist/packages/${options.projectName}/.tsbuildinfo`,
-//       },
-//     }
-//   })
-//
-//   // updateJson(tree, `${options.projectRoot}/tsconfig.lib.json`, (json: TsConfigJson) => {
-//   //   const { compilerOptions: { module, ...compilerOptions } } = json
-//   //   return {
-//   //     ...json,
-//   //     compilerOptions: {
-//   //       ...compilerOptions,
-//   //       noEmit: false,
-//   //       outDir: 'dist',
-//   //       rootDir: 'src',
-//   //     },
-//   //   }
-//   // })
-// }
+function updateTsConfig(tree: Tree, options: NormalizedSchema) {
+  for (const file of [
+    `${options.projectRoot}/tsconfig.lib.json`,
+    `${options.projectRoot}/tsconfig.spec.json`,
+  ]) {
+    if (tree.exists(file)) {
+      updateJson(tree, file, ({ compilerOptions, ...json }: TsConfigJson) => {
+        return {
+          ...json,
+          compilerOptions: {
+            ...compilerOptions,
+            module: 'esnext',
+            moduleResolution: 'bundler',
+          },
+        }
+      })
+    }
+  }
+}
 
 function updateESLintConfig(tree: Tree, options: NormalizedSchema) {
   const eslintConfig = `${options.projectRoot}/eslint.config.mjs`
