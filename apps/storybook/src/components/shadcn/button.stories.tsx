@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { fn } from 'storybook/test'
+import { expect, fn, within } from 'storybook/test'
 
 import { Button } from '@peaks/ui/components/button'
 
@@ -31,12 +31,12 @@ export const Primary: Story = {
     onClick: fn(),
   },
 
-  // play: async ({ args, canvasElement, userEvent }) => {
-  //   const canvas = within(canvasElement)
-  //   const button = canvas.getByRole('button')
-  //
-  //   await userEvent.click(button)
-  //
-  //   await expect(args.onClick).toHaveBeenCalled()
-  // },
+  play: async ({ args, canvasElement, userEvent }) => {
+    const canvas = within(canvasElement)
+    const button = canvas.getByRole('button')
+
+    await userEvent.click(button)
+
+    await expect(args.onClick).toHaveBeenCalled()
+  },
 }

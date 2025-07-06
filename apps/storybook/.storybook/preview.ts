@@ -4,7 +4,6 @@ import type { Preview, ReactRenderer } from '@storybook/react-vite'
 import '../styles/global.css'
 
 const preview: Preview = {
-  // ...rest of preview
   decorators: [
     withThemeByClassName<ReactRenderer>({
       defaultTheme: 'light',
