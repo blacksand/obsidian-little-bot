@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@peaks/core':
+        specifier: workspace:*
+        version: link:packages/core
       '@peaks/ui':
         specifier: workspace:*
         version: link:packages/ui
@@ -254,7 +257,7 @@ importers:
 
   packages/config-testing: {}
 
-  packages/obsidian-api: {}
+  packages/core: {}
 
   packages/ui: {}
 

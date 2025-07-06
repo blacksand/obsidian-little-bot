@@ -17,6 +17,7 @@
     "typecheck": "nx run-many --target=typecheck"
   },
   "dependencies": {
+    "@peaks/core": "workspace:*",
     "@peaks/ui": "workspace:*",
     "@peaks/utils": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.14",
