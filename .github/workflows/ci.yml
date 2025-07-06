@@ -39,7 +39,7 @@ jobs:
           cache: pnpm
 
       - name: Install packages
-        run: = NODE_OPTIONS='--experimental-strip-types' pnpm install --frozen-lockfile
+        run: NODE_OPTIONS='--experimental-strip-types' pnpm install --frozen-lockfile
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install
