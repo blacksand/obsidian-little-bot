@@ -1,70 +1,54 @@
 import type { App, PluginManifest } from 'obsidian'
 import { Plugin } from 'obsidian'
 
-import { ObsidianApi } from '@peaks/core'
+import { LittleBotSettings, ObsidianApi } from '@peaks/core'
+import type { LittleBot } from '@peaks/core'
 import type { Logger } from '@peaks/utils/logging'
 import { getLogger } from '@peaks/utils/logging'
 
-interface LittleBotSettings {
-  version: string
-}
-
-const VERSION = '0.0.1'
-
-function ensureSettings(input?: Partial<LittleBotSettings>) {
-  const settings = { ...input }
-  if (!settings.version) {
-    settings.version = VERSION
-  }
-
-  return settings as LittleBotSettings
-}
-
-export default class LittleBotPlugin extends Plugin {
+export default class LittleBotPlugin extends Plugin implements LittleBot {
   readonly logger: Logger
+  readonly settings: LittleBotSettings
   readonly obsidianApi: ObsidianApi
 
   constructor(app: App, manifest: PluginManifest) {
     super(app, manifest)
 
-    this.obsidianApi = new ObsidianApi(app)
-
     this.logger = getLogger({ name: '🤖' })
-    this.logger.debug('Initializing LittleBot')
-  }
+    this.logger.trace('Initializing LittleBot')
 
-  private _settings = ensureSettings({ version: VERSION })
-
-  get settings() {
-    return this._settings
-  }
-
-  protected set settings(value: LittleBotSettings) {
-    this._settings = ensureSettings(value)
+    this.obsidianApi = new ObsidianApi(app)
+    this.settings = new LittleBotSettings(this)
   }
 
   override async onload() {
     this.logger.trace('Loading LittleBot')
 
     // 读取插件设置
-    this.settings = await this.loadData()
+    await this.settings.load()
 
     // 添加一条命令
     this.addCommand({
       id: 'little-bot-command',
-      name: 'Run Little Bot Command',
+      name: 'Ask Little Bot ...',
       callback: () => {
-        this.logger.debug('Running Little Bot command')
+        this.logger.trace('Running Little Bot command')
       },
     })
   }
 
-  override onUserEnable() {
-    this.logger.debug('User enabled Little Bot')
+  override onunload() {
+    super.onunload()
+
+    this.logger.trace('Unloading Little Bot')
   }
 
-  override onExternalSettingsChange() {
-    const settings = this.loadData()
-    this.logger.debug('New settings', settings)
+  override onUserEnable() {
+    this.logger.trace('User enabled Little Bot')
+  }
+
+  override async onExternalSettingsChange() {
+    this.logger.trace('External settings changed')
+    await this.settings.load(true)
   }
 }
