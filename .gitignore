@@ -53,3 +53,5 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
 storybook-static
+
+/docs/obsidian/app.css.txt

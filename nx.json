@@ -8,12 +8,12 @@
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.ts",
+      "!{projectRoot}/eslint.config.?([cm])[jt]s",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/?(vi)test-setup.[jt]s",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/tsconfig.storybook.json"
@@ -22,7 +22,7 @@
       "{workspaceRoot}/.github/workflows/ci.yml"
     ]
   },
-  "nxCloudId": "686310b817c61a0a6ce5059f",
+  "// nxCloudId": "686310b817c61a0a6ce5059f",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -107,13 +107,27 @@
     },
     "storybook": {
       "options": {
-        "port": 9090
+        "port": 49090
       }
     },
     "test": {
       "dependsOn": [
         "^build"
       ]
+    }
+  },
+  "release": {
+    "projects": [
+      "*",
+      "!peaks-nx"
+    ],
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    },
+    "version": {
+      "conventionalCommits": true
     }
   },
   "generators": {
@@ -123,6 +137,7 @@
         "linter": "eslint",
         "skipPackageJson": true,
         "skipTsConfig": false,
+        "useProjectJson": false,
         "unitTestRunner": "vitest"
       },
       "library-ui": {
@@ -131,6 +146,7 @@
         "style": "css",
         "skipPackageJson": true,
         "skipTsConfig": false,
+        "useProjectJson": false,
         "unitTestRunner": "vitest"
       }
     }

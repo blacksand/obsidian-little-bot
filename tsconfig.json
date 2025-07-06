@@ -25,6 +25,12 @@
     },
     {
       "path": "./apps/storybook"
+    },
+    {
+      "path": "./packages/utils"
+    },
+    {
+      "path": "./packages/core"
     }
   ],
   "files": []

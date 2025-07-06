@@ -1,7 +1,9 @@
 import type { Tree } from '@nx/devkit'
-import { formatFiles, readProjectConfiguration, updateJson, updateProjectConfiguration } from '@nx/devkit'
+import { formatFiles, updateJson } from '@nx/devkit'
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils'
 import { libraryGenerator } from '@nx/js'
+
+import type { TsConfigJson } from '../../types/tsconfig-json'
 
 type LibJsGeneratorSchema = Parameters<typeof libraryGenerator>[1]
 
@@ -15,9 +17,9 @@ export async function libJsGenerator(tree: Tree, schema: LibJsGeneratorSchema) {
   const options = await normalizeOptions(tree, schema)
   await libraryGenerator(tree, { ...options, skipFormat: true })
 
-  updateProject(tree, options)
+  // updateProject(tree, options)
   updatePackageJson(tree, options)
-  // updateTsConfig(tree, options)
+  updateTsConfig(tree, options)
 
   updateESLintConfig(tree, options)
   updateVitestConfig(tree, options)
@@ -43,19 +45,19 @@ async function normalizeOptions(
   return { ...options, importPath, projectName, projectRoot }
 }
 
-function updateProject(tree: Tree, options: NormalizedSchema) {
-  if (options.bundler !== 'tsc') {
-    return
-  }
-
-  const project = readProjectConfiguration(tree, options.projectName)
-
-  // 移除默认的 tsc build target
-  const { build, ...targets } = project.targets ?? {}
-  project.targets = targets
-
-  updateProjectConfiguration(tree, options.projectName, project)
-}
+// function updateProject(tree: Tree, options: NormalizedSchema) {
+//   if (options.bundler !== 'tsc') {
+//     return
+//   }
+//
+//   const project = readProjectConfiguration(tree, options.projectName)
+//
+//   // 移除默认的 tsc build target
+//   const { build, ...targets } = project.targets ?? {}
+//   project.targets = targets
+//
+//   updateProjectConfiguration(tree, options.projectName, project)
+// }
 
 function updatePackageJson(tree: Tree, options: NormalizedSchema) {
   if (options.bundler !== 'none') {
@@ -88,36 +90,25 @@ function updatePackageJson(tree: Tree, options: NormalizedSchema) {
   })
 }
 
-// interface TsConfigJson {
-//   compilerOptions: {
-//     module?: string
-//   }
-// }
-
-// function updateTsConfig(tree: Tree, options: NormalizedSchema) {
-//   updateJson(tree, `${options.projectRoot}/tsconfig.json`, (json: TsConfigJson) => {
-//     return {
-//       ...json,
-//       compilerOptions: {
-//         incremental: true,
-//         tsBuildInfoFile: `../../dist/packages/${options.projectName}/.tsbuildinfo`,
-//       },
-//     }
-//   })
-//
-//   // updateJson(tree, `${options.projectRoot}/tsconfig.lib.json`, (json: TsConfigJson) => {
-//   //   const { compilerOptions: { module, ...compilerOptions } } = json
-//   //   return {
-//   //     ...json,
-//   //     compilerOptions: {
-//   //       ...compilerOptions,
-//   //       noEmit: false,
-//   //       outDir: 'dist',
-//   //       rootDir: 'src',
-//   //     },
-//   //   }
-//   // })
-// }
+function updateTsConfig(tree: Tree, options: NormalizedSchema) {
+  for (const file of [
+    `${options.projectRoot}/tsconfig.lib.json`,
+    `${options.projectRoot}/tsconfig.spec.json`,
+  ]) {
+    if (tree.exists(file)) {
+      updateJson(tree, file, ({ compilerOptions, ...json }: TsConfigJson) => {
+        return {
+          ...json,
+          compilerOptions: {
+            ...compilerOptions,
+            module: 'esnext',
+            moduleResolution: 'bundler',
+          },
+        }
+      })
+    }
+  }
+}
 
 function updateESLintConfig(tree: Tree, options: NormalizedSchema) {
   const eslintConfig = `${options.projectRoot}/eslint.config.mjs`

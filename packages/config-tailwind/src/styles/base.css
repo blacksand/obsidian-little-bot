@@ -1,0 +1,21 @@
+@theme inline {
+  --color-background: var(--background-primary);
+  --color-foreground: var(--text-normal);
+  --color-card: var(--callout-content-background);
+  --color-card-foreground: var(--callout-title-color);
+  --color-popover: var(--background-modifier-active-hover);
+  --color-popover-foreground: var(--text-normal);
+  --color-primary: var(--background-primary-alt);
+  --color-primary-foreground: var(--text-normal);
+  --color-secondary: var(--background-secondary);
+  --color-secondary-foreground: var(--text-normal);
+  --color-muted: var(--background-modifier-hover);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: hsl(var(--interactive-accent-hsl));
+  --color-accent-foreground: var(--text-on-accent);
+  --color-destructive: var(--background-modifier-error);
+  --color-destructive-foreground: var(--text-error);
+  --color-border: var(--background-modifier-border);
+  --color-input: oklch(1 0 0 / 15%);
+  --color-ring: var(--text-faint);
+}

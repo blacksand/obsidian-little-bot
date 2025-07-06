@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "module": "esnext",
+    "module": "nodenext",
     "moduleResolution": "bundler",
     "outDir": "out-tsc/storybook"
   },
@@ -23,9 +23,12 @@
     "src/**/*.stories.tsx",
     "src/**/*.stories.mdx",
     ".storybook/*.js",
-    ".storybook/*.ts"
+    ".storybook/*.ts",
+    ".storybook/*.cts",
+    ".storybook/*.mts"
   ],
   "exclude": [
+    "vitest.config.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "src/**/*.spec.js",

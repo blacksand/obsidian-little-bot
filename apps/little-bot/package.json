@@ -1,9 +1,6 @@
 {
-  "name": "@peaks/little-bot",
+  "name": "little-bot",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
-  "devDependencies": {
-    "@peaks/config-tailwind": "workspace:*"
-  }
+  "private": true
 }

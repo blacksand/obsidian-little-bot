@@ -1,5 +1,6 @@
 import { GLOB_MARKDOWN_CODE, GLOB_TS, GLOB_TSX } from '@antfu/eslint-config'
 import type { Linter } from 'eslint'
+import globals from 'globals'
 import path from 'node:path'
 
 interface TypescriptOptions {
@@ -16,6 +17,10 @@ export function typeAware(options: TypescriptOptions): Linter.Config[] {
       files: [GLOB_TS, GLOB_TSX],
       ignores: [GLOB_MARKDOWN_CODE],
       languageOptions: {
+        globals: {
+          ...globals.node,
+          ...globals.browser,
+        },
         parserOptions: {
           projectService: {
             allowDefaultProject,
