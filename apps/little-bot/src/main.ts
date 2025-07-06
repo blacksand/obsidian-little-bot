@@ -2,8 +2,8 @@ import type { App, PluginManifest } from 'obsidian'
 import { Plugin } from 'obsidian'
 
 import { ObsidianApi } from '@peaks/core'
-import type { Logger } from '@peaks/utils'
-import { getLogger } from '@peaks/utils'
+import type { Logger } from '@peaks/utils/logging'
+import { getLogger } from '@peaks/utils/logging'
 
 interface LittleBotSettings {
   version: string

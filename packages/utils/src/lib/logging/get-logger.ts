@@ -1,17 +1,6 @@
-import type { Merge } from 'ts-essentials'
-import type { ILogObj, ISettingsParam } from 'tslog'
 import { Logger as TsLogger } from 'tslog'
 
-export interface LoggingObject extends ILogObj {
-  scope?: string
-}
-
-export type Logger = TsLogger<LoggingObject>
-
-export type Settings = Merge<ISettingsParam<LoggingObject>, {
-  name: string
-  scope?: string
-}>
+import type { Logger, LoggingObject, Settings } from './types'
 
 const MIN_LEVEL = process.env.NODE_ENV === 'production' ? 4 : 1
 
