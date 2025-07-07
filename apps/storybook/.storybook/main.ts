@@ -1,6 +1,5 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import type { StorybookConfig } from '@storybook/react-vite'
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { mergeConfig } from 'vite'
 
@@ -19,6 +18,11 @@ const config: StorybookConfig = {
     // `${uiLibrary}/src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))`,
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
+  typescript: {
+    // Overrides the default Typescript configuration to allow multi-package components to be documented via Autodocs.
+    reactDocgen: 'react-docgen',
+    check: false,
+  },
 
   addons: [
     '@storybook/addon-a11y',
@@ -27,15 +31,13 @@ const config: StorybookConfig = {
     '@storybook/addon-vitest',
   ],
 
-  viteFinal: async (viteConfig) =>
-    mergeConfig(viteConfig, {
-      plugins: [
-        tailwindcss(),
-        react(),
-        nxViteTsPaths(),
-      ],
-    }),
+  viteFinal: async (viteConfig) => {
+    const { default: tailwindcss } = await import('@tailwindcss/vite')
 
+    return mergeConfig(viteConfig, {
+      plugins: [tailwindcss(), react(), nxViteTsPaths()],
+    })
+  },
 }
 
 export default config
