@@ -1,5 +1,5 @@
-import type { UserConfigExport } from 'vitest/config'
+import type { ViteUserConfig } from 'vitest/config'
 
-export function testingConfig(configFileUrl: string): UserConfigExport
+export function testingConfig(configFileUrl: string): ViteUserConfig
 
 export { mergeConfig } from 'vitest/config'
