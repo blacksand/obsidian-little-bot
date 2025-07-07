@@ -2,8 +2,8 @@ import type { BackendModule } from 'i18next'
 
 import type { ObsidianApi } from '@peaks/core'
 
-import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
 import { ObsidianI18nBackend } from './obsidian-i18n-backend'
+import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
 
 const basePath = '/mock/base/path'
 

@@ -1,5 +1,5 @@
-import type { Awaitable, TypedFlatConfigItem } from '@antfu/eslint-config'
 import antfu, { GLOB_TS, GLOB_TSX } from '@antfu/eslint-config'
+import type { Awaitable, TypedFlatConfigItem } from '@antfu/eslint-config'
 import type { Linter } from 'eslint'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
