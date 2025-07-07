@@ -15,7 +15,7 @@
     "out-tsc",
     "dist",
     "vite.config.ts",
-    "vitest.config.ts",
+    "vitest.config.mts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "eslint.config.js",

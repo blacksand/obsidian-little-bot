@@ -36,7 +36,7 @@ module.exports = {
   outExtension: {
     '.js': '.js',
   },
+  platform: 'node',
   sourcemap: production ? false : 'inline',
-  target: 'es2018',
   treeShaking: true,
 }

@@ -11,6 +11,9 @@ importers:
       '@peaks/core':
         specifier: workspace:*
         version: link:packages/core
+      '@peaks/i18n':
+        specifier: workspace:*
+        version: link:packages/i18n
       '@peaks/ui':
         specifier: workspace:*
         version: link:packages/ui
@@ -35,6 +38,9 @@ importers:
       globals:
         specifier: ^16.3.0
         version: 16.3.0
+      i18next:
+        specifier: ^25.3.1
+        version: 25.3.1(typescript@5.8.3)
       lucide-react:
         specifier: ^0.525.0
         version: 0.525.0(react@18.3.1)
@@ -258,6 +264,8 @@ importers:
   packages/config-testing: {}
 
   packages/core: {}
+
+  packages/i18n: {}
 
   packages/ui: {}
 
@@ -4900,6 +4908,14 @@ packages:
   human-signals@4.3.1:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
+
+  i18next@25.3.1:
+    resolution: {integrity: sha512-S4CPAx8LfMOnURnnJa8jFWvur+UX/LWcl6+61p9VV7SK2m0445JeBJ6tLD0D5SR0H29G4PYfWkEhivKG5p4RDg==}
+    peerDependencies:
+      typescript: ^5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -13153,6 +13169,12 @@ snapshots:
       - supports-color
 
   human-signals@4.3.1: {}
+
+  i18next@25.3.1(typescript@5.8.3):
+    dependencies:
+      '@babel/runtime': 7.27.6
+    optionalDependencies:
+      typescript: 5.8.3
 
   iconv-lite@0.4.24:
     dependencies:
