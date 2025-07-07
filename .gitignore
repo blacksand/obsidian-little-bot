@@ -55,3 +55,6 @@ vitest.config.*.timestamp*
 storybook-static
 
 /docs/obsidian/app.css.txt
+
+.env.local
+.env.*.local

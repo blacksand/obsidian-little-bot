@@ -12,14 +12,14 @@ export const workspaceRoot = path.resolve(currentPath, '../../../..')
  * Configures a testing environment based on the provided configuration file URL.
  *
  * @param {string} configFileUrl - The file URL of the configuration file to set up the testing environment.
- * @return {import('vitest/config').UserConfigExport} The configuration object generated for the testing environment.
+ * @return {import('vitest/config').UserConfig} The configuration object generated for the testing environment.
  */
 export function testingConfig(configFileUrl) {
   const projectRoot = path.dirname(fileURLToPath(configFileUrl))
   const relativePath = path.relative(workspaceRoot, projectRoot)
 
   return defineConfig({
-    cacheDir: path.join(workspaceRoot, 'tmp', 'vite', relativePath),
+    cacheDir: path.join(workspaceRoot, 'tmp', 'vitest', relativePath),
     root: projectRoot,
 
     plugins: [
@@ -27,11 +27,16 @@ export function testingConfig(configFileUrl) {
     ],
 
     test: {
+      browser: {
+        enabled: true,
+        headless: true,
+        instances: [{ browser: 'chromium' }],
+        provider: 'playwright',
+      },
       coverage: {
         provider: 'v8',
         reportsDirectory: path.join(workspaceRoot, 'coverage', relativePath),
       },
-      environment: 'jsdom',
       globals: true,
       passWithNoTests: true,
       restoreMocks: true,
@@ -42,5 +47,6 @@ export function testingConfig(configFileUrl) {
       reporters: ['default'],
       server: { deps: { inline: ['@peaks/**'] } },
     },
+
   })
 }

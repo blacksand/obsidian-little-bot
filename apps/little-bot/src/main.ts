@@ -3,6 +3,7 @@ import { Plugin } from 'obsidian'
 
 import { LittleBotSettings, ObsidianApi } from '@peaks/core'
 import type { LittleBot } from '@peaks/core'
+import { init as initI18n } from '@peaks/i18n'
 import type { Logger } from '@peaks/utils/logging'
 import { getLogger } from '@peaks/utils/logging'
 
@@ -17,12 +18,17 @@ export default class LittleBotPlugin extends Plugin implements LittleBot {
     this.logger = getLogger({ name: '🤖' })
     this.logger.trace('Initializing LittleBot')
 
-    this.obsidianApi = new ObsidianApi(app)
+    this.obsidianApi = new ObsidianApi(this)
     this.settings = new LittleBotSettings(this)
   }
 
   override async onload() {
     this.logger.trace('Loading LittleBot')
+
+    const { t } = await initI18n(
+      this.obsidianApi,
+      this.logger.getSubLogger({ name: '🌏' }, { scope: 'i18n' }),
+    )
 
     // 读取插件设置
     await this.settings.load()
@@ -30,7 +36,7 @@ export default class LittleBotPlugin extends Plugin implements LittleBot {
     // 添加一条命令
     this.addCommand({
       id: 'little-bot-command',
-      name: 'Ask Little Bot ...',
+      name: t('little-bot-command', 'Ask Little Bot...'),
       callback: () => {
         this.logger.trace('Running Little Bot command')
       },

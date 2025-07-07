@@ -4,13 +4,10 @@ import type { DeepReadonly } from 'ts-essentials'
 
 import { version } from '@peaks/core/package.json'
 import { isObject } from '@peaks/utils'
-import { getLogger } from '@peaks/utils/logging'
 import type { Logger } from '@peaks/utils/logging'
+import { getLogger } from '@peaks/utils/logging'
 
-export interface SanitizedSettings {
-  locale: string
-  version: string
-}
+import type { SanitizedSettings } from './types'
 
 const defaultSettings = {
   locale: 'en',
