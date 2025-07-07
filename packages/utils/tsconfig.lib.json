@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
+    "baseUrl": ".",
+    "rootDir": "src",
+    "module": "nodenext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true
+  },
+  "references": [],
+  "include": ["src/**/*.ts"]
+}

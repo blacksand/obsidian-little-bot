@@ -23,6 +23,7 @@
           "cjs"
         ],
         "bundle": true,
+        "thirdParty": true,
         "main": "apps/little-bot/src/main.ts",
         "tsConfig": "apps/little-bot/tsconfig.app.json",
         "deleteOutputPath": false,

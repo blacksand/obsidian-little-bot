@@ -12,10 +12,10 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from './command'
+} from '@peaks/ui/components/command'
 
 const meta = {
-  title: 'components/shadcn-ui/Command',
+  // title: 'components/shadcn-ui/Command',
   component: Command,
   subcomponents: {
     Command,

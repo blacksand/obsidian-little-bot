@@ -12,18 +12,6 @@
     "./utils": "./src/lib/utils/index.ts",
     "./package.json": "./package.json"
   },
-  "dependencies": {
-    "@radix-ui/react-dialog": "catalog:",
-    "@radix-ui/react-slot": "catalog:",
-    "cmdk": "catalog:",
-    "lucide-react": "catalog:"
-  },
-  "devDependencies": {
-    "class-variance-authority": "catalog:dev",
-    "clsx": "catalog:dev",
-    "shadcn": "catalog:dev",
-    "tailwind-merge": "catalog:dev"
-  },
   "nx": {
     "tags": [
       "scope:shared",
