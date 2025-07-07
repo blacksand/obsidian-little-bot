@@ -2,5 +2,8 @@
   "name": "@peaks/storybook",
   "type": "module",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test-storybook": "pnpm exec vitest --project=storybook"
+  }
 }

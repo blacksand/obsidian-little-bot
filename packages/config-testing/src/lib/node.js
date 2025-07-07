@@ -10,7 +10,7 @@ export const workspaceRoot = path.resolve(currentPath, '../../../..')
 /**
  * vitest config with node environment
  * @param {string} configFileUrl - The file URL of the configuration file to set up the testing environment.
- * @return {import('vitest/config').UserConfigExport} The configuration object generated for the testing environment.
+ * @return {import('vitest/config').ViteUserConfig} The configuration object generated for the testing environment.
  */
 export function testingConfig(configFileUrl) {
   const projectRoot = path.dirname(fileURLToPath(configFileUrl))

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@peaks/core": "workspace:*",
+    "@peaks/i18n": "workspace:*",
     "@peaks/ui": "workspace:*",
     "@peaks/utils": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -26,6 +27,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "globals": "^16.3.0",
+    "i18next": "^25.3.1",
     "lucide-react": "^0.525.0",
     "obsidian": "latest",
     "react": "^18.3.1",
