@@ -24,7 +24,7 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "importHelpers": true,
-    "noEmit": true,
+    "noEmit": false,
     "sourceMap": true,
     "esModuleInterop": true,
     "isolatedModules": true,

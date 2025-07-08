@@ -11,7 +11,11 @@
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../config-eslint/tsconfig.lib.json"
+    }
+  ],
   "include": [
     "src/**/*.ts"
   ],

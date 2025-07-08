@@ -15,5 +15,11 @@
     ]
   },
   "peerDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "@peaks/core": "workspace:*",
+    "@peaks/utils": "workspace:*",
+    "i18next": "catalog:",
+    "obsidian": "catalog:",
+    "remeda": "catalog:"
+  }
 }

@@ -1,9 +1,9 @@
 import type { BackendModule } from 'i18next'
 
-import type { ObsidianApi } from '@peaks/core'
+import type { LittleBot, Logger, LoggerSettings, ObsidianApi } from '@peaks/core'
 
-import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
 import { ObsidianI18nBackend } from './obsidian-i18n-backend'
+import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
 
 const basePath = '/mock/base/path'
 
@@ -11,8 +11,22 @@ const basePath = '/mock/base/path'
 const mockObsidianApi = {
   adapterRead: vi.fn(),
   getLittleBotPath: () => basePath,
-  // @ts-expect-error types
+  // @ts-expect-error types - other properties not needed for tests
 } satisfies ObsidianApi
+
+// Mock the Logger
+const mockLogger = {
+  error: vi.fn(),
+  // @ts-expect-error types - other properties not needed for tests
+} satisfies Logger
+
+// Mock the LittleBot
+const mockLittleBot = {
+  // @ts-expect-error types - other properties not needed for tests
+  getLogger: (_settings: LoggerSettings) => mockLogger,
+  // @ts-expect-error types - other properties not needed for tests
+  obsidian: mockObsidianApi,
+} satisfies LittleBot
 
 describe('obsidianI18nBackend', () => {
   let backend: BackendModule<ObsidianI18nBackendOptions>
@@ -21,7 +35,11 @@ describe('obsidianI18nBackend', () => {
   }
 
   beforeEach(() => {
-    backend = new ObsidianI18nBackend(mockObsidianApi as never)
+    // Reset mocks before each test
+    vi.clearAllMocks()
+
+    // @ts-expect-error mock
+    backend = new ObsidianI18nBackend(mockLittleBot)
     backend.init(null as never, options, null as never)
   })
 
@@ -56,9 +74,9 @@ describe('obsidianI18nBackend', () => {
       const callback = vi.fn()
 
       backend.read(language, namespace, callback)
-      await Promise.resolve()
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
-      expect(callback).toHaveBeenCalledWith(new Error(`Failed to parse ${fullPath}`), null)
+      expect(callback).toHaveBeenCalledWith(error, null)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
     })
 
@@ -79,6 +97,8 @@ describe('obsidianI18nBackend', () => {
       const error = new Error(`Failed to parse ${fullPath}`)
       expect(callback).toHaveBeenCalledWith(error, null)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
+      // Verify that the logger's error method is called
+      expect(mockLogger.error).toHaveBeenCalled()
     })
   })
 
@@ -121,14 +141,20 @@ describe('obsidianI18nBackend', () => {
       mockObsidianApi.adapterRead
         .mockResolvedValueOnce('{"key": "value"}')
         .mockRejectedValueOnce(error)
+        // Add a case with invalid JSON to test logger.error
+        .mockResolvedValueOnce('{invalid json}')
+        .mockResolvedValueOnce('{"key": "value"}')
 
       const callback = vi.fn()
 
       backend.readMulti?.(languages, namespaces, callback)
       await new Promise((resolve) => setTimeout(resolve, 100))
 
-      expect(callback).toHaveBeenCalledWith(null, { en: { translation: { key: 'value' } } })
+      const expectedValue = { en: { translation: { key: 'value' } }, fr: { common: { key: 'value' } } }
+      expect(callback).toHaveBeenCalledWith(null, expectedValue)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledTimes(4)
+      // Verify that the logger's error method is called for the invalid JSON
+      expect(mockLogger.error).toHaveBeenCalled()
     })
   })
 })

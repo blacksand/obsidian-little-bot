@@ -8,6 +8,21 @@
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "dependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@eslint-react/eslint-plugin": "catalog:",
+    "@eslint/js": "catalog:",
+    "eslint-flat-config-utils": "catalog:",
+    "eslint-plugin-better-tailwindcss": "catalog:",
+    "eslint-plugin-format": "catalog:",
+    "eslint-plugin-jsx-a11y": "catalog:",
+    "eslint-plugin-promise": "catalog:",
+    "eslint-plugin-react": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "eslint-plugin-unicorn": "catalog:",
+    "globals": "catalog:"
+  },
   "nx": {
     "tags": [
       "type:util",
