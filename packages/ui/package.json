@@ -12,6 +12,21 @@
     "./utils": "./src/lib/utils/index.ts",
     "./package.json": "./package.json"
   },
+  "dependencies": {
+    "@radix-ui/react-dialog": "catalog:",
+    "@radix-ui/react-slot": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "cmdk": "catalog:",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "shadcn": "catalog:",
+    "tailwind-merge": "catalog:"
+  },
+  "devDependencies": {
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:"
+  },
   "nx": {
     "tags": [
       "scope:shared",

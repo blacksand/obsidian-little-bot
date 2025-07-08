@@ -2,5 +2,17 @@
   "name": "little-bot",
   "type": "module",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@peaks/core": "workspace:*",
+    "@peaks/i18n": "workspace:*",
+    "@peaks/obsidian": "workspace:*",
+    "@peaks/settings": "workspace:*",
+    "@peaks/utils": "workspace:*",
+    "obsidian": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "catalog:",
+    "tailwindcss": "catalog:"
+  }
 }

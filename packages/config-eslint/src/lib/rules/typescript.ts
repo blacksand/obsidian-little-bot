@@ -94,7 +94,7 @@ export function typescript(): Linter.Config[] {
     },
     {
       name: 'peaks/typescript/disables/generated-files',
-      files: [`**/*.generated.${GLOB_SRC_EXT}`, '**/payload-types.ts'],
+      files: [`**/*.generated.${GLOB_SRC_EXT}`],
       rules: {
         'antfu/top-level-function': 'off',
         'eslint-comments/no-unlimited-disable': 'off',

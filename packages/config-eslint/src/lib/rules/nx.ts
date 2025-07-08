@@ -15,6 +15,7 @@ export function nx({ allowedGlobalImport }: NxOptions = {}): Linter.Config[] {
         nx: nxPlugin as unknown as ESLint.Plugin,
       },
       rules: {
+        'nx/dependency-checks': 'error',
         'nx/enforce-module-boundaries': [
           'error',
           {

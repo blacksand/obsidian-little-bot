@@ -11,7 +11,17 @@
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../../packages/config-testing/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "../../packages/config-eslint/tsconfig.lib.json"
+    }
+  ],
   "include": [
     "src/**/*.ts"
   ],

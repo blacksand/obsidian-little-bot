@@ -1,0 +1,22 @@
+{
+  "name": "@peaks/obsidian",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:api"
+    ]
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "@peaks/core": "workspace:*",
+    "obsidian": "catalog:"
+  }
+}

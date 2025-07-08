@@ -6,8 +6,12 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./logging": "./src/lib/logging/index.ts",
     "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@peaks/core": "workspace:*",
+    "remeda": "catalog:",
+    "tslog": "catalog:"
   },
   "nx": {
     "tags": [

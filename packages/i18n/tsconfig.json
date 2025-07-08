@@ -2,6 +2,18 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../config-testing"
+    },
+    {
+      "path": "../utils"
+    },
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../config-eslint"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {
