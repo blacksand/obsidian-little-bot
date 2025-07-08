@@ -17,7 +17,7 @@ export function testingConfig(configFileUrl) {
   const relativePath = path.relative(workspaceRoot, projectRoot)
 
   return defineConfig({
-    cacheDir: path.join(workspaceRoot, 'tmp', 'vite', relativePath),
+    cacheDir: path.join(projectRoot, 'out-tsc', 'vitest'),
     root: projectRoot,
 
     test: {
@@ -30,7 +30,7 @@ export function testingConfig(configFileUrl) {
       passWithNoTests: true,
       restoreMocks: true,
       root: projectRoot,
-      watch: false,
+      // watch: false,
 
       include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
       reporters: ['default'],

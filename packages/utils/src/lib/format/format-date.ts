@@ -1,10 +1,13 @@
 import { isDate } from 'remeda'
 
-import type { FormatNumberOptions } from './format-number'
+export interface FormatDateTimeOptions extends Intl.DateTimeFormatOptions {
+  defaultValue?: string
+  locale?: string
+}
 
 export function formatDate(
   value: Date | string | undefined | null,
-  { defaultValue, locale, ...options }: FormatNumberOptions = {},
+  { defaultValue, locale, ...options }: FormatDateTimeOptions = {},
 ) {
   if (!value) {
     return defaultValue
