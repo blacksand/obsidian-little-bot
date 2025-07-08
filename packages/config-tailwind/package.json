@@ -10,6 +10,10 @@
     "./obsidian.css": "./src/styles/obsidian.css",
     "./storybook.css": "./src/styles/storybook.css"
   },
+  "devDependencies": {
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:"
+  },
   "nx": {
     "tags": [
       "type:util",

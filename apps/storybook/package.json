@@ -5,5 +5,19 @@
   "private": true,
   "scripts": {
     "test-storybook": "pnpm exec vitest --project=storybook"
+  },
+  "dependencies": {
+    "@peaks/ui": "workspace:*",
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-themes": "catalog:",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "lucide-react": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:"
   }
 }

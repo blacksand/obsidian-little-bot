@@ -1,36 +1,19 @@
-import { getLanguage, normalizePath } from 'obsidian'
+import type { Plugin } from 'obsidian'
 
-import type { LittleBot } from '../little-bot/types'
-import type { ObsidianApp } from './types'
+import type { LittleBot } from '../little-bot/little-bot'
+import type { ObsidianApp } from './obsidian-app'
 
-export class ObsidianApi {
+export interface ObsidianApi {
   readonly app: ObsidianApp
+  readonly littleBot: LittleBot
 
-  constructor(readonly littleBot: LittleBot) {
-    this.app = littleBot.app
-  }
+  getPlugin: (name: Lowercase<string>) => Plugin | undefined
 
-  getPlugin(name: Lowercase<string>) {
-    return this.app.plugins?.enabledPlugins?.has(name)
-      ? this.app.plugins.plugins?.[name]
-      : undefined
-  }
+  getLanguage: () => string
 
-  getLanguage() {
-    return getLanguage()
-  }
+  getLittleBotPath: () => string
 
-  getLittleBotPath(): string {
-    return this.littleBot.manifest.dir ?? `${this.app.vault.configDir}/plugins/${this.littleBot.manifest.id}`
-  }
+  normalizePath: (path: string) => string
 
-  normalizePath(path: string): string {
-    return normalizePath(path)
-  }
-
-  async adapterRead(incomingPath: string): Promise<string> {
-    const path = this.normalizePath(incomingPath)
-
-    return this.app.vault.adapter.read(path)
-  }
+  adapterRead: (incomingPath: string) => Promise<string>
 }

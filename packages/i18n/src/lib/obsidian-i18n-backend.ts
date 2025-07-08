@@ -1,9 +1,8 @@
 import type { BackendModule, MultiReadCallback, ReadCallback, Resource, Services } from 'i18next'
 import { mergeDeep } from 'remeda'
 
-import type { ObsidianApi } from '@peaks/core'
+import type { LittleBot, Logger, ObsidianApi } from '@peaks/core'
 import { isObject } from '@peaks/utils'
-import type { Logger } from '@peaks/utils/logging'
 
 export interface ObsidianI18nBackendOptions {
   addPath?: string // 相对于插件目录，默认为 'locals/{{lng}}/{{ns}}.missing.json'
@@ -15,23 +14,29 @@ const defaultOptions = {
   loadPath: 'locals/{{lng}}/{{ns}}.json',
 } satisfies ObsidianI18nBackendOptions
 
+/* eslint-disable promise/prefer-await-to-then */
+
 export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOptions> {
   readonly type = 'backend'
 
   private readonly basePath: string
+  private readonly obsidian: ObsidianApi
+  private readonly logger: Logger
   private options: Required<ObsidianI18nBackendOptions>
 
-  constructor(readonly obsidian: ObsidianApi, readonly logger?: Logger) {
+  constructor(littleBot: LittleBot) {
+    this.obsidian = littleBot.obsidian
+    this.logger = littleBot.getLogger({ name: '🌏', scope: 'i18n' })
+
     this.options = { ...defaultOptions }
-    this.basePath = obsidian.getLittleBotPath()
+    this.basePath = this.obsidian.getLittleBotPath()
   }
 
   init(_: Services, backendOptions: ObsidianI18nBackendOptions): void {
     this.options = { ...defaultOptions, ...backendOptions }
   }
 
-  // eslint-disable-next-line ts/no-misused-promises
-  async read(language: string, namespace: string, callback: ReadCallback) {
+  read(language: string, namespace: string, callback: ReadCallback) {
     if (!this.basePath) {
       return callback(new Error('Base path is required'), null)
     }
@@ -40,15 +45,18 @@ export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOpt
     const localePath = loadPath.replaceAll('{{lng}}', language).replaceAll('{{ns}}', namespace)
     const fullPath = `${this.basePath}/${localePath}`
 
-    try {
-      const data = await this.obsidian.adapterRead(fullPath)
-      const json: unknown = JSON.parse(data)
-      callback(null, isObject(json) ? json : null)
-    }
-    catch (reason) {
-      this.logger?.error(reason)
-      callback(new Error(`Failed to parse ${fullPath}`), null)
-    }
+    this.obsidian.adapterRead(fullPath).then((data) => {
+      try {
+        const json: unknown = JSON.parse(data)
+        callback(null, isObject(json) ? json : null)
+      }
+      catch (reason) {
+        this.logger?.error(reason)
+        callback(new Error(`Failed to parse ${fullPath}`), null)
+      }
+    }).catch((reason: Error) => {
+      callback(reason, null)
+    })
   }
 
   readMulti(languages: readonly string[], namespaces: readonly string[], callback: MultiReadCallback): void {
@@ -75,23 +83,20 @@ export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOpt
       }),
     )
 
-    Promise.all(promises)
-      // eslint-disable-next-line promise/prefer-await-to-then
-      .then((resources) => {
-        const result: Resource = resources.reduce<Resource>(
-          (merged, resource) => resource ? mergeDeep(merged, resource) : merged,
-          {},
-        )
-
-        callback(null, result)
-      })
-      // eslint-disable-next-line promise/prefer-await-to-then
-      .catch((reason: Error) => {
-        callback(reason, null)
-      })
+    Promise.all(promises).then((resources) => {
+      const result: Resource = resources.reduce<Resource>(
+        (merged, resource) => resource ? mergeDeep(merged, resource) : merged,
+        {},
+      )
+      callback(null, result)
+    }).catch((reason: Error) => {
+      callback(reason, null)
+    })
   }
 
   // create(languages: readonly string[], namespace: string, key: string, fallbackValue: string): void {}
 
   // save(language: string, namespace: string, data: ResourceLanguage): void {}
 }
+
+/* eslint-enable promise/prefer-await-to-then */

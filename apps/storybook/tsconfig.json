@@ -2,6 +2,15 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../packages/config-testing"
+    },
+    {
+      "path": "../../packages/ui"
+    },
+    {
+      "path": "../../packages/config-eslint"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

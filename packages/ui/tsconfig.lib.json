@@ -13,6 +13,14 @@
     ],
     "outDir": "dist"
   },
+  "references": [
+    {
+      "path": "../config-testing/tsconfig.lib.json"
+    },
+    {
+      "path": "../config-eslint/tsconfig.lib.json"
+    }
+  ],
   "include": [
     "src/**/*.js",
     "src/**/*.jsx",

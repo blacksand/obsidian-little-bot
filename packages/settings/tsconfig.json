@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "references": [
+    {
+      "path": "../config-testing"
+    },
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../config-eslint"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "files": [],
+  "include": []
+}

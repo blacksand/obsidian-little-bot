@@ -8,6 +8,10 @@
     "emitDeclarationOnly": false,
     "outDir": "dist"
   },
-  "references": [],
+  "references": [
+    {
+      "path": "../../packages/config-eslint/tsconfig.lib.json"
+    }
+  ],
   "include": ["src/**/*.ts"]
 }

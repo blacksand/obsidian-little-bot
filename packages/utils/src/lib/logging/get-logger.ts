@@ -1,10 +1,10 @@
 import { Logger as TsLogger } from 'tslog'
 
-import type { Logger, LoggingObject, Settings } from './types'
+import type { Logger, LoggerSettings, LoggingObject } from '@peaks/core'
 
 const MIN_LEVEL = process.env.NODE_ENV === 'production' ? 4 : 1
 
-export function getLogger(incomingSettings: Settings, logObject?: LoggingObject): Logger {
+export function getLogger(incomingSettings: LoggerSettings, logObject?: LoggingObject): Logger {
   const { scope, ...settings } = incomingSettings
 
   return new TsLogger<LoggingObject>(

@@ -1,16 +1,16 @@
-import type { App, PluginManifest } from 'obsidian'
 import { Plugin } from 'obsidian'
+import type { App, PluginManifest } from 'obsidian'
 
-import { LittleBotSettings, ObsidianApi } from '@peaks/core'
-import type { LittleBot } from '@peaks/core'
+import type { LittleBot, Logger, LoggerSettings } from '@peaks/core'
 import { init as initI18n } from '@peaks/i18n'
-import type { Logger } from '@peaks/utils/logging'
-import { getLogger } from '@peaks/utils/logging'
+import { ObsidianApiImpl } from '@peaks/obsidian'
+import { LittleBotSettingsImpl } from '@peaks/settings'
+import { getLogger } from '@peaks/utils'
 
 export default class LittleBotPlugin extends Plugin implements LittleBot {
   readonly logger: Logger
-  readonly settings: LittleBotSettings
-  readonly obsidianApi: ObsidianApi
+  readonly obsidian: ObsidianApiImpl
+  readonly settings: LittleBotSettingsImpl
 
   constructor(app: App, manifest: PluginManifest) {
     super(app, manifest)
@@ -18,17 +18,14 @@ export default class LittleBotPlugin extends Plugin implements LittleBot {
     this.logger = getLogger({ name: '🤖' })
     this.logger.trace('Initializing LittleBot')
 
-    this.obsidianApi = new ObsidianApi(this)
-    this.settings = new LittleBotSettings(this)
+    this.obsidian = new ObsidianApiImpl(this)
+    this.settings = new LittleBotSettingsImpl(this)
   }
 
   override async onload() {
     this.logger.trace('Loading LittleBot')
 
-    const { t } = await initI18n(
-      this.obsidianApi,
-      this.logger.getSubLogger({ name: '🌏' }, { scope: 'i18n' }),
-    )
+    const { t } = await initI18n(this)
 
     // 读取插件设置
     await this.settings.load()
@@ -56,5 +53,9 @@ export default class LittleBotPlugin extends Plugin implements LittleBot {
   override async onExternalSettingsChange() {
     this.logger.trace('External settings changed')
     await this.settings.load(true)
+  }
+
+  getLogger(settings: LoggerSettings): Logger {
+    return getLogger(settings)
   }
 }

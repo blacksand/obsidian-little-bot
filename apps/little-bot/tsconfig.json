@@ -2,6 +2,27 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../packages/config-testing"
+    },
+    {
+      "path": "../../packages/utils"
+    },
+    {
+      "path": "../../packages/settings"
+    },
+    {
+      "path": "../../packages/obsidian"
+    },
+    {
+      "path": "../../packages/i18n"
+    },
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/config-eslint"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {
