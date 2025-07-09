@@ -13,6 +13,9 @@
   },
   "references": [
     {
+      "path": "../config-testing/tsconfig.lib.json"
+    },
+    {
       "path": "../core/tsconfig.lib.json"
     },
     {

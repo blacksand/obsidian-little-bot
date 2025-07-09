@@ -19,10 +19,10 @@ describe('formatPercent', () => {
   })
 
   it('应当处理小数', () => {
-    expect(formatPercent(0.12345, { ...en, maximumFractionDigits: 2 })).toBe(
+    expect(formatPercent(0.123_45, { ...en, maximumFractionDigits: 2 })).toBe(
       '12.35%',
     )
-    expect(formatPercent(0.12345, { ...de, maximumFractionDigits: 2 })).toBe(
+    expect(formatPercent(0.123_45, { ...de, maximumFractionDigits: 2 })).toBe(
       '12,35 %',
     )
   })
