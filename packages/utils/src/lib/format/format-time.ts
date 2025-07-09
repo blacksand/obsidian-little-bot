@@ -1,8 +1,11 @@
-import type { FormatNumberOptions } from './format-number'
+export interface FormatDateTimeOptions extends Intl.DateTimeFormatOptions {
+  defaultValue?: string
+  locale?: string
+}
 
 export function formatTime(
   value: Date,
-  { locale, ...options }: FormatNumberOptions = {},
+  { locale, ...options }: FormatDateTimeOptions = {},
 ) {
   return value.toLocaleTimeString(locale ?? 'zh-CN', options)
 }

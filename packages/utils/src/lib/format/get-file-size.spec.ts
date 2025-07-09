@@ -17,13 +17,13 @@ describe('getFileSize', () => {
   it('应当将 512B 到 524287B 之间的大小格式化为 K', () => {
     expect(getFileSize(512)).toBe('0.5K')
     expect(getFileSize(1024)).toBe('1.0K')
-    expect(getFileSize(10000)).toBe('9.8K')
-    expect(getFileSize(524287)).toBe('512.0K')
+    expect(getFileSize(10_000)).toBe('9.8K')
+    expect(getFileSize(524_287)).toBe('512.0K')
   })
 
   it('应当将大于等于 524288B 的大小格式化为 M', () => {
-    expect(getFileSize(524288)).toBe('0.5M')
-    expect(getFileSize(1048576)).toBe('1.0M')
-    expect(getFileSize(10000000)).toBe('9.5M')
+    expect(getFileSize(524_288)).toBe('0.5M')
+    expect(getFileSize(1_048_576)).toBe('1.0M')
+    expect(getFileSize(10_000_000)).toBe('9.5M')
   })
 })
