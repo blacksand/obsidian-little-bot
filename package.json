@@ -1,9 +1,17 @@
 {
-  "name": "@peaks/workspace",
+  "name": "@peaks/obsidian-little-bot",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
+  "packageManager": "pnpm@10.12.4",
   "license": "MIT",
+  "homepage": "https://github.com/blacksand/obsidian-little-bot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blacksand/obsidian-little-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blacksand/obsidian-little-bot/issues"
+  },
   "scripts": {
     "build": "nx build little-bot",
     "build-storybook": "nx run storybook:build-storybook",
