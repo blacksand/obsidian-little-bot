@@ -15,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "effect": "catalog:",
     "obsidian": "catalog:"
   },
   "devDependencies": {
