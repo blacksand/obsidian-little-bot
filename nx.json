@@ -113,7 +113,10 @@
     "test": {
       "dependsOn": [
         "^build"
-      ]
+      ],
+      "options": {
+        "watch": false
+      }
     }
   },
   "release": {
