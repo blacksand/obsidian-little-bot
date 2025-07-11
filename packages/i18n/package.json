@@ -14,10 +14,10 @@
       "type:util"
     ]
   },
-  "peerDependencies": {},
   "dependencies": {
     "@peaks/core": "workspace:*",
     "@peaks/utils": "workspace:*",
+    "effect": "catalog:",
     "i18next": "catalog:",
     "obsidian": "catalog:",
     "remeda": "catalog:"

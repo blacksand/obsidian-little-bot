@@ -1,6 +1,9 @@
+import { Effect } from 'effect'
 import type { BackendModule } from 'i18next'
+import { expect } from 'vitest'
+import type { Mock } from 'vitest'
 
-import type { LittleBot, Logger, LoggerSettings, ObsidianApi } from '@peaks/core'
+import { ObsidianApi } from '@peaks/core'
 
 import { ObsidianI18nBackend } from './obsidian-i18n-backend'
 import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
@@ -8,25 +11,15 @@ import type { ObsidianI18nBackendOptions } from './obsidian-i18n-backend'
 const basePath = '/mock/base/path'
 
 // Mock the ObsidianApi
-const mockObsidianApi = {
+const ObsidianApiTest = ObsidianApi.of({
   adapterRead: vi.fn(),
-  getLittleBotPath: () => basePath,
-  // @ts-expect-error types - other properties not needed for tests
-} satisfies ObsidianApi
+  getLanguage: vi.fn(),
+  getLittleBotPath: () => Effect.succeed(basePath),
+  getPlugin: vi.fn(),
+  normalizePath: vi.fn(),
+})
 
-// Mock the Logger
-const mockLogger = {
-  error: vi.fn(),
-  // @ts-expect-error types - other properties not needed for tests
-} satisfies Logger
-
-// Mock the LittleBot
-const mockLittleBot = {
-  // @ts-expect-error types - other properties not needed for tests
-  getLogger: (_settings: LoggerSettings) => mockLogger,
-  // @ts-expect-error types - other properties not needed for tests
-  obsidian: mockObsidianApi,
-} satisfies LittleBot
+const mockObsidianApi = ObsidianApiTest
 
 describe('obsidianI18nBackend', () => {
   let backend: BackendModule<ObsidianI18nBackendOptions>
@@ -38,8 +31,7 @@ describe('obsidianI18nBackend', () => {
     // Reset mocks before each test
     vi.clearAllMocks()
 
-    // @ts-expect-error mock
-    backend = new ObsidianI18nBackend(mockLittleBot)
+    backend = new ObsidianI18nBackend(mockObsidianApi)
     backend.init(null as never, options, null as never)
   })
 
@@ -47,11 +39,11 @@ describe('obsidianI18nBackend', () => {
     it('should read and parse a locale file successfully', async () => {
       const language = 'en'
       const namespace = 'translation'
-      const mockData = '{"key": "value"}'
+      const mockData = Effect.succeed('{"key": "value"}')
       const fullPath = `${basePath}/locals/${language}/${namespace}.json`
 
       // Mock the adapterRead to return valid JSON data
-      mockObsidianApi.adapterRead.mockResolvedValueOnce(mockData)
+      ;(mockObsidianApi.adapterRead as Mock).mockReturnValue(mockData)
 
       const callback = vi.fn()
 
@@ -69,7 +61,7 @@ describe('obsidianI18nBackend', () => {
       const error = new Error('File not found')
 
       // Mock the adapterRead to throw an error
-      mockObsidianApi.adapterRead.mockRejectedValueOnce(error)
+      ;(mockObsidianApi.adapterRead as Mock).mockReturnValueOnce(Effect.fail(error))
 
       const callback = vi.fn()
 
@@ -84,21 +76,21 @@ describe('obsidianI18nBackend', () => {
       const language = 'en'
       const namespace = 'translation'
       const fullPath = `${basePath}/locals/${language}/${namespace}.json`
-      const mockData = '{invalid json}'
+      const mockData = Effect.succeed('{invalid json}')
 
       // Mock the adapterRead to return invalid JSON data
-      mockObsidianApi.adapterRead.mockResolvedValueOnce(mockData)
+      ;(mockObsidianApi.adapterRead as Mock).mockReturnValueOnce(mockData)
 
       const callback = vi.fn()
 
       backend.read(language, namespace, callback)
       await Promise.resolve()
 
-      const error = new Error(`Failed to parse ${fullPath}`)
+      const error = new Error(`Invalid file ${fullPath}`)
       expect(callback).toHaveBeenCalledWith(error, null)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
       // Verify that the logger's error method is called
-      expect(mockLogger.error).toHaveBeenCalled()
+      // expect(mockLogger.error).toHaveBeenCalled()
     })
   })
 
@@ -106,14 +98,14 @@ describe('obsidianI18nBackend', () => {
     it('should read multiple locale files successfully', async () => {
       const languages = ['en', 'fr']
       const namespaces = ['translation', 'common']
-      const mockData = '{"key": "value"}'
+      const mockData = Effect.succeed('{"key": "value"}')
       const resources: Record<string, Record<string, any>> = {}
 
       for (const lang of languages) {
         for (const ns of namespaces) {
           // const fullPath = `${basePath}/locals/${lang}/${ns}.json`
           resources[lang] = { ...resources[lang], [ns]: { key: 'value' } }
-          mockObsidianApi.adapterRead.mockResolvedValueOnce(mockData)
+          ;(mockObsidianApi.adapterRead as Mock).mockReturnValueOnce(mockData)
         }
       }
 
@@ -138,12 +130,12 @@ describe('obsidianI18nBackend', () => {
       const error = new Error('File not found')
 
       // Mock the first call to succeed and the second to fail
-      mockObsidianApi.adapterRead
-        .mockResolvedValueOnce('{"key": "value"}')
+      ;(mockObsidianApi.adapterRead as Mock)
+        .mockReturnValueOnce(Effect.succeed('{"key": "value"}'))
         .mockRejectedValueOnce(error)
         // Add a case with invalid JSON to test logger.error
-        .mockResolvedValueOnce('{invalid json}')
-        .mockResolvedValueOnce('{"key": "value"}')
+        .mockReturnValueOnce(Effect.succeed('{invalid json}'))
+        .mockReturnValueOnce(Effect.succeed('{"key": "value"}'))
 
       const callback = vi.fn()
 
@@ -154,7 +146,7 @@ describe('obsidianI18nBackend', () => {
       expect(callback).toHaveBeenCalledWith(null, expectedValue)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledTimes(4)
       // Verify that the logger's error method is called for the invalid JSON
-      expect(mockLogger.error).toHaveBeenCalled()
+      // expect(mockLogger.error).toHaveBeenCalled()
     })
   })
 })

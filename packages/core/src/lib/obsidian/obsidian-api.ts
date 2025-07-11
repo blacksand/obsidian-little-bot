@@ -1,19 +1,16 @@
+import type { Either } from 'effect'
+import { Context } from 'effect'
+import type { Effect } from 'effect/Effect'
 import type { Plugin } from 'obsidian'
 
-import type { LittleBot } from '../little-bot/little-bot'
-import type { ObsidianApp } from './obsidian-app'
+export class ObsidianApi extends Context.Tag('ObsidianApi')<
+  ObsidianApi,
+  {
+    adapterRead: (incomingPath: string) => Effect<string>
+    normalizePath: (path: string) => Effect<string>
 
-export interface ObsidianApi {
-  readonly app: ObsidianApp
-  readonly littleBot: LittleBot
-
-  getPlugin: (name: Lowercase<string>) => Plugin | undefined
-
-  getLanguage: () => string
-
-  getLittleBotPath: () => string
-
-  normalizePath: (path: string) => string
-
-  adapterRead: (incomingPath: string) => Promise<string>
-}
+    getLanguage: () => Effect<string>
+    getLittleBotPath: () => Effect<string>
+    getPlugin: (name: Lowercase<string>) => Either.Either<Plugin, string>
+  }
+>() {}

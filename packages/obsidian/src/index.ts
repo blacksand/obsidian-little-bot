@@ -1,1 +1,1 @@
-export { ObsidianApiImpl } from './lib/obsidian-api-impl.js'
+export { ObsidianApiLive } from './lib/obsidian-api-live.js'

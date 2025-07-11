@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@peaks/core": "workspace:*",
+    "obsidian": "catalog:",
     "remeda": "catalog:"
   },
   "devDependencies": {

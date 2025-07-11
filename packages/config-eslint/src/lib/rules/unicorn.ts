@@ -22,11 +22,12 @@ export function unicorn(): Linter.Config[] {
           'error',
           {
             case: 'kebabCase',
-            ignore: ['README.md', 'CHANGELOG.md', 'LICENSE.md'],
+            ignore: ['README.md', 'CHANGELOG.md', 'LICENSE', 'LICENSE.md'],
           },
         ],
         // 使用 eslint-comments 代替
         'unicorn/no-abusive-eslint-disable': 'off',
+        'unicorn/no-array-callback-reference': 'off',
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-nested-ternary': 'off',
         'unicorn/no-null': 'off',
@@ -48,6 +49,7 @@ export function unicorn(): Linter.Config[] {
             },
           },
         ],
+        'unicorn/throw-new-error': 'off',
       },
     },
   ]
