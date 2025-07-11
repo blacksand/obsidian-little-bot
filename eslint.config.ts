@@ -3,7 +3,7 @@ import { eslintConfig } from '@peaks/config-eslint'
 const config = eslintConfig(
   {
     type: 'app',
-    ignores: ['apps/**', 'packages/**', 'tools/**', '.cursor/templates/**'],
+    ignores: ['apps/**', 'packages/**', 'tools/**', '.bmad-core/**'],
 
     formatters: {
       css: true,

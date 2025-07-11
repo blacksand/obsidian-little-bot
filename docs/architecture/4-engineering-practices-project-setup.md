@@ -12,12 +12,14 @@
 | |-- /config-eslint/ # 共享的 ESLint 配置
 | |-- /config-tailwind/ # 共享的 Tailwind CSS 配置
 | |-- /config-testing/ # 共享的测试配置 (Vitest, Playwright)
+| |-- /core/ # 核心数据结构，包括在项目间共享的基础数据结构及 Effect 依赖注入定义
 | |-- /commands/ # 核心命令解析与管理逻辑
 | |-- /nlp/ # 自然语言处理核心逻辑
-| |-- /obsidian-mock/ # Obsidian API 的模拟库，用于测试
+| |-- /i18n/ # 国际化(i18n)相关功能
+| |-- /obsidian/ # 与Obsidian API交互的特定逻辑
+| |-- /settings/ # 插件设置管理
 | |-- /ui/ # 共享 UI 组件库 (基于 shadcn/ui)
-| |-- /utils/ # 通用工具函数 (将包含 logger)
-| |-- /.../ # 其他功能包
+| |-- /utils/ # 通用工具函数
 |-- nx.json
 |-- pnpm-workspace.yaml
 |-- package.json
@@ -26,7 +28,7 @@
 
 为了保证代码库的长期健康，我们将通过 **Nx 的 ESLint 规则 nx/enforce-module-boundaries** 来严格执行内部包之间的依赖关系。
 
-- **核心原则**: UI 层只与 commands 包通信，commands 包作为编排器调用其他底层包。
+- **核心原则**: ui 层只与 `commands` 包通信，`commands` 包作为编排器调用其他底层包。`core` 定义了在项目间共享的基础数据结构。
 
 ## 4.3. State Management Philosophy
 
@@ -45,3 +47,53 @@
   1. **提交规范**: 所有 git commit **必须**遵循 **Conventional Commits** 规范。
   2. **版本与发布**: 使用 **nx release** 命令来自动化版本管理。
   3. **持续集成 (CI/CD)**: **GitHub Actions** 将被用于自动化测试、构建和发布流程。
+
+## 4.6. Service Management with Effect
+
+为了规范化服务定义、实现和依赖注入，我们引入了 **Effect** 库。所有服务都应遵循以下模式：
+
+- **核心原则**: **接口与实现分离**。服务接口在 `packages/core` 中定义，具体实现在各自的功能包中提供。
+
+- **实现模式**:
+  1. **标准服务 (有依赖或复杂逻辑)**:
+     - **接口定义**: 在 `packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
+
+       ```typescript
+       // packages/core/src/lib/i18n/i18n-backend.ts
+       import { Context } from 'effect'
+
+       export class I18nBackend extends Context.Tag('@peaks/core/I18nBackend')<
+          I18nBackend,
+          Effect.Effect<BackendModule>
+        >() {}
+       ```
+
+     - **实现**: 在具体的功能包中（如 `packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
+
+       ```typescript
+       // packages/i18n/src/lib/obsidian-i18n-backend.ts
+       import { I18nBackend } from '@little-bot/core'
+       import { Layer } from 'effect'
+
+       export const I18nBackendLive = Layer.succeed(
+         I18nBackend,
+         I18nBackend.of({
+           // ... implementation
+         })
+       )
+       ```
+
+  2. **简单服务 (无依赖关系)**:
+     - 对于没有外部依赖的简单服务，可以直接使用 `Effect.Service` 类来快速定义和实现。
+
+       ```typescript
+       // packages/core/src/lib/logging/logging.ts
+       import { Effect } from 'effect'
+
+       export class Logging extends Effect.Service<Logging>()(
+         '@peaks/core/Logging',
+         {
+           succeed: { getLogger: () => { /* ... implementation */ } },
+         },
+       ) {}
+       ```

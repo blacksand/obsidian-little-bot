@@ -16,7 +16,7 @@
     "build": "nx build little-bot",
     "build-storybook": "nx run storybook:build-storybook",
     "clean": "nx reset",
-    "dev": "nx serve little-bot",
+    "dev": "nx build little-bot -c development --watch",
     "lint": "nx run-many --target=lint",
     "shadcn": "nx run @peaks/ui:shadcn",
     "start": "nx serve little-bot -c production",

@@ -6,9 +6,10 @@
 
 ### 1.1. Change Log
 
-| Date       | Version | Description                | Author              |
-| :--------- | :------ | :------------------------- | :------------------ |
-| 2025-07-03 | 1.0     | Initial architecture draft | Winston (Architect) |
+| Date       | Version | Description                       | Author              |
+| :--------- | :------ | :-------------------------------- | :------------------ |
+| 2025-07-03 | 1.0     | Initial architecture draft        | Winston (Architect) |
+| 2025-07-11 | 1.1     | Add Effect-TS for DI and services | Winston (Architect) |
 
 ## 2. High Level Architecture
 
@@ -50,21 +51,22 @@ end
 - **组件化架构 (Component-Based Architecture)**: 严格遵循组件化的开发模式，将UI拆分为独立的、可重用的部分。
 
 * **本地优先 (Local-First)**: MVP版本的所有核心UI逻辑和状态管理都将在客户端本地运行。
-* **依赖注入 (Dependency Injection)**: 核心服务将被设计为可注入的依赖项，以实现松耦合和高可测试性。
+* **依赖注入 (Dependency Injection)**: 我们将全面采用 **Effect-TS** (https://effect.website/) 作为依赖注入和副作用管理的核心框架。核心服务将在 `packages/core` 中通过 `Context.Tag` 定义接口，并在具体的功能包中提供实现，以实现松耦合和高可测试性。
 
 ## 3. Frontend Tech Stack
 
-| Category                 | Technology            | Version   | Purpose                   | Rationale                                                      |
-| :----------------------- | :-------------------- | :-------- | :------------------------ | :------------------------------------------------------------- |
-| **语言 (Language)**      | TypeScript            | ~5.4.0    | 提供类型安全，减少错误    | 与Obsidian插件开发生态兼容，提升代码质量和可维护性。           |
-| **框架 (Framework)**     | React                 | ~18.2.0   | 构建用户界面的核心库      | shadcn/ui 基于React构建，拥有庞大的生态和社区支持。            |
-| **Monorepo 编排器**      | Nx                    | ~19.0.0   | 智能任务运行与缓存        | 为复杂的monorepo提供依赖关系图分析和高效的任务编排。           |
-| **插件构建工具**         | @nx/esbuild           | latest    | 构建和打包整个插件        | 极快的构建速度，将所有包的源码打包成Obsidian所需的单一JS文件。 |
-| **UI 组件库**            | shadcn/ui             | latest    | 构建指令面板的核心组件    | 美观、可访问性好，且基于Tailwind。                             |
-| **样式方案 (Styling)**   | Tailwind CSS          | v4.0-beta | 实现所有UI样式            | 通过@theme指令能更好地与Obsidian主题集成。                     |
-| **测试框架 (Testing)**   | Vitest                | ~1.6.0    | 对所有包进行单元/组件测试 | 与TypeScript和React无缝集成，性能出色。                        |
-| **测试库 (Testing Lib)** | React Testing Library | ~15.0.0   | 模拟用户交互，测试组件    | 鼓励编写面向用户行为的测试，确保组件的健壮性。                 |
-| **包管理器**             | pnpm                  | ~9.1.0    | 依赖管理                  | 速度快，节省磁盘空间，并与Nx monorepo协同工作。                |
+| Category                 | Technology            | Version   | Purpose                        | Rationale                                                      |
+| :----------------------- | :-------------------- | :-------- | :----------------------------- | :------------------------------------------------------------- |
+| **语言 (Language)**      | TypeScript            | ~5.4.0    | 提供类型安全，减少错误         | 与Obsidian插件开发生态兼容，提升代码质量和可维护性。           |
+| **框架 (Framework)**     | React                 | ~18.2.0   | 构建用户界面的核心库           | shadcn/ui 基于React构建，拥有庞大的生态和社区支持。            |
+| **Monorepo 编排器**      | Nx                    | ~19.0.0   | 智能任务运行与缓存             | 为复杂的monorepo提供依赖关系图分析和高效的任务编排。           |
+| **插件构建工具**         | @nx/esbuild           | latest    | 构建和打包整个插件             | 极快的构建速度，将所有包的源码打包成Obsidian所需的单一JS文件。 |
+| **UI 组件库**            | shadcn/ui             | latest    | 构建指令面板的核心组件         | 美观、可访问性好，且基于Tailwind。                             |
+| **样式方案 (Styling)**   | Tailwind CSS          | v4.0-beta | 实现所有UI样式                 | 通过@theme指令能更好地与Obsidian主题集成。                     |
+| **测试框架 (Testing)**   | Vitest                | ~1.6.0    | 对所有包进行单元/组件测试      | 与TypeScript和React无缝集成，性能出色。                        |
+| **测试库 (Testing Lib)** | React Testing Library | ~15.0.0   | 模拟用户交互，测试组件         | 鼓励编写面向用户行为的测试，确保组件的健壮性。                 |
+| **包管理器**             | pnpm                  | ~9.1.0    | 依赖管理                       | 速度快，节省磁盘空间，并与Nx monorepo协同工作。                |
+| **依赖注入/函数式核心**  | Effect                | latest    | 服务管理、依赖注入与副作用处理 | 提供了一个强大且类型安全的框架来组织代码，实现关注点分离。     |
 
 ## 4. Engineering Practices & Project Setup
 
@@ -80,12 +82,14 @@ end
 | |-- /config-eslint/ # 共享的 ESLint 配置
 | |-- /config-tailwind/ # 共享的 Tailwind CSS 配置
 | |-- /config-testing/ # 共享的测试配置 (Vitest, Playwright)
+| |-- /core/ # 核心数据结构，包括在项目间共享的基础数据结构及 Effect 依赖注入定义
 | |-- /commands/ # 核心命令解析与管理逻辑
 | |-- /nlp/ # 自然语言处理核心逻辑
-| |-- /obsidian-mock/ # Obsidian API 的模拟库，用于测试
+| |-- /i18n/ # 国际化(i18n)相关功能
+| |-- /obsidian/ # 与Obsidian API交互的特定逻辑
+| |-- /settings/ # 插件设置管理
 | |-- /ui/ # 共享 UI 组件库 (基于 shadcn/ui)
-| |-- /utils/ # 通用工具函数 (将包含 logger)
-| |-- /.../ # 其他功能包
+| |-- /utils/ # 通用工具函数
 |-- nx.json
 |-- pnpm-workspace.yaml
 |-- package.json
@@ -94,7 +98,7 @@ end
 
 为了保证代码库的长期健康，我们将通过 **Nx 的 ESLint 规则 nx/enforce-module-boundaries** 来严格执行内部包之间的依赖关系。
 
-- **核心原则**: UI 层只与 commands 包通信，commands 包作为编排器调用其他底层包。
+- **核心原则**: ui 层只与 `commands` 包通信，`commands` 包作为编排器调用其他底层包。`core` 定义了在项目间共享的基础数据结构。
 
 ### 4.3. State Management Philosophy
 
@@ -114,18 +118,68 @@ end
   2. **版本与发布**: 使用 **nx release** 命令来自动化版本管理。
   3. **持续集成 (CI/CD)**: **GitHub Actions** 将被用于自动化测试、构建和发布流程。
 
+### 4.6. Service Management with Effect
+
+为了规范化服务定义、实现和依赖注入，我们引入了 **Effect** 库。所有服务都应遵循以下模式：
+
+- **核心原则**: **接口与实现分离**。服务接口在 `packages/core` 中定义，具体实现在各自的功能包中提供。
+
+- **实现模式**:
+  1. **标准服务 (有依赖或复杂逻辑)**:
+     - **接口定义**: 在 `packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
+
+       ```typescript
+       // packages/core/src/lib/i18n/i18n-backend.ts
+       import { Context } from 'effect'
+
+       export class I18nBackend extends Context.Tag('@peaks/core/I18nBackend')<
+          I18nBackend,
+          Effect.Effect<BackendModule>
+        >() {}
+       ```
+
+     - **实现**: 在具体的功能包中（如 `packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
+
+       ```typescript
+       // packages/i18n/src/lib/obsidian-i18n-backend.ts
+       import { I18nBackend } from '@little-bot/core'
+       import { Layer } from 'effect'
+
+       export const I18nBackendLive = Layer.succeed(
+         I18nBackend,
+         I18nBackend.of({
+           // ... implementation
+         })
+       )
+       ```
+
+  2. **简单服务 (无依赖关系)**:
+     - 对于没有外部依赖的简单服务，可以直接使用 `Effect.Service` 类来快速定义和实现。
+
+       ```typescript
+       // packages/core/src/lib/logging/logging.ts
+       import { Effect } from 'effect'
+
+       export class Logging extends Effect.Service<Logging>()(
+         '@peaks/core/Logging',
+         {
+           succeed: { getLogger: () => { /* ... implementation */ } },
+         },
+       ) {}
+       ```
+
 ## 5. Logging Strategy
 
 为了在开发过程中获得强大的调试能力，同时严格遵守Obsidian插件的发布规范，我们将实现一个灵活的、环境感知的日志记录系统。
 
 - **核心原则**: **严禁**在最终发布的生产版本代码中包含任何 console.log 调用。
 - **实现方式**:
-  1. 我们将在 packages/utils 中创建一个专用的 logger 模块。
+  1. 我们将在 packages/core 中创建一个专用的 logger 模块。
   2. 该模块将提供多个日志级别，例如 logger.debug(), logger.info(), logger.warn(), logger.error()。
   3. 所有对 console 的调用都将包含在条件块中，该条件块会检查 process.env.NODE_ENV 的值。
 
      ```typescript
-     // packages/utils/logger.ts
+     // packages/core/logging/logger.ts
      export const logger = {
        debug: (message: string, ...args: any[]) => {
          if (process.env.NODE_ENV === 'development') {

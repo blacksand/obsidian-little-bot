@@ -1,0 +1,31 @@
+{
+  "contextFileName": [
+    "agents/ux-expert.md",
+    "agents/sm.md",
+    "agents/qa.md",
+    "agents/po.md",
+    "agents/pm.md",
+    "agents/dev.md",
+    "agents/bmad-orchestrator.md",
+    "agents/bmad-master.md",
+    "agents/architect.md",
+    "agents/analyst.md",
+    "GEMINI.md"
+  ],
+  "mcpServers": {
+    "context7": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "nx-mcp": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "nx-mcp@latest"
+      ]
+    }
+  }
+}

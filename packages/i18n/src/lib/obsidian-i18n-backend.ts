@@ -26,8 +26,6 @@ export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOpt
 
   constructor(readonly obsidian: typeof ObsidianApi.Service) {
     this.options = { ...defaultOptions }
-
-    // Effect.runSync(Effect.succeed(obsidian.getLittleBotPath()))
   }
 
   init(_: Services, backendOptions: ObsidianI18nBackendOptions): void {
@@ -35,7 +33,7 @@ export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOpt
   }
 
   read(language: string, namespace: string, callback: ReadCallback) {
-    Effect.runSync(Effect.gen(this, function* () {
+    Effect.runFork(Effect.gen(this, function* () {
       const basePath = yield* this.obsidian.getLittleBotPath()
 
       const localePath = this.options.loadPath.replaceAll('{{lng}}', language).replaceAll('{{ns}}', namespace)

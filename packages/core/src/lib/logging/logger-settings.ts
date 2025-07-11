@@ -1,4 +1,4 @@
 export interface LoggerSettings {
-  name: string
+  name?: string
   scope?: string
 }
