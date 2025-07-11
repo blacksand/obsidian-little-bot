@@ -9,6 +9,7 @@
     "@peaks/obsidian": "workspace:*",
     "@peaks/settings": "workspace:*",
     "@peaks/utils": "workspace:*",
+    "effect": "catalog:",
     "obsidian": "catalog:"
   },
   "devDependencies": {

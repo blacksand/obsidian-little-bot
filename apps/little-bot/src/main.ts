@@ -1,61 +1,94 @@
+import { Effect, Layer, ManagedRuntime } from 'effect'
 import { Plugin } from 'obsidian'
-import type { App, PluginManifest } from 'obsidian'
+import type { PluginManifest } from 'obsidian'
 
-import type { LittleBot, Logger, LoggerSettings } from '@peaks/core'
-import { init as initI18n } from '@peaks/i18n'
-import { ObsidianApiImpl } from '@peaks/obsidian'
-import { LittleBotSettingsImpl } from '@peaks/settings'
-import { getLogger } from '@peaks/utils'
+import { Internationalization, LittleBot, LittleBotSettings, Logging, ObsidianApi } from '@peaks/core'
+import type { LittleBotRuntime, ObsidianApp } from '@peaks/core'
+import { I18nBackend, InternationalizationLive, ObsidianI18nBackend } from '@peaks/i18n'
+import { ObsidianApiLive } from '@peaks/obsidian'
 
-export default class LittleBotPlugin extends Plugin implements LittleBot {
-  readonly logger: Logger
-  readonly obsidian: ObsidianApiImpl
-  readonly settings: LittleBotSettingsImpl
+export default class LittleBotPlugin extends Plugin {
+  readonly runtime: LittleBotRuntime<I18nBackend | Internationalization>
+  readonly logger: ReturnType<typeof Logging.Service['getLogger']>
 
-  constructor(app: App, manifest: PluginManifest) {
+  constructor(app: ObsidianApp, manifest: PluginManifest) {
     super(app, manifest)
 
-    this.logger = getLogger({ name: '🤖' })
-    this.logger.trace('Initializing LittleBot')
+    const LittleBotLive = Layer.succeed(
+      LittleBot,
+      LittleBot.of(
+        { app, manifest, saveData: this.saveData.bind(this) },
+      ),
+    )
 
-    this.obsidian = new ObsidianApiImpl(this)
-    this.settings = new LittleBotSettingsImpl(this)
+    const ObsidianI18nBackendLive = Layer.effect(
+      I18nBackend,
+      ObsidianApi.pipe(Effect.map((obsidian) => new ObsidianI18nBackend(obsidian))),
+    )
+
+    const apiLayer = Layer.provideMerge(
+      ObsidianApiLive,
+      Layer.mergeAll(
+        LittleBotLive,
+        Logging.Default,
+        LittleBotSettings.Default,
+      ),
+    )
+
+    const i18nLayer = Layer.merge(
+      Layer.provide(ObsidianI18nBackendLive, ObsidianApiLive),
+      Layer.provide(InternationalizationLive, ObsidianI18nBackendLive),
+    )
+
+    this.runtime = ManagedRuntime.make(
+      Layer.provideMerge(i18nLayer, apiLayer),
+    )
+
+    this.logger = this.runtime.runSync(
+      Logging.pipe(
+        Effect.map(({ getLogger }) => getLogger({ name: '🤖' })),
+        Effect.tap((logger) => logger.trace('Initialized LittleBot')),
+      ),
+    )
   }
 
   override async onload() {
-    this.logger.trace('Loading LittleBot')
-
-    const { t } = await initI18n(this)
-
-    // 读取插件设置
-    await this.settings.load()
-
-    // 添加一条命令
-    this.addCommand({
-      id: 'little-bot-command',
-      name: t('little-bot-command', 'Ask Little Bot...'),
-      callback: () => {
-        this.logger.trace('Running Little Bot command')
-      },
-    })
+    this.runtime.runFork(LittleBotSettings.pipe(
+      Effect.tap(() => this.logger.trace('Loading Little Bot...')),
+      Effect.zip(Effect.promise(() => this.loadData())),
+      Effect.andThen(([settings, data]) => settings.load(data)),
+      Effect.tap((loaded) => this.logger.trace('Settings loaded', loaded)),
+      Effect.flatMap(() => Internationalization),
+      Effect.flatMap((i18n) => i18n.init()),
+      Effect.tap((t) => this.addCommand({
+        id: 'little-bot-command',
+        name: t('little-bot-command', 'Ask Little Bot...'),
+        callback: () => {
+          this.runtime.runFork(
+            this.logger.trace('Running Little Bot command'),
+          )
+        },
+      })),
+    ))
   }
 
-  override onunload() {
-    super.onunload()
+  override async onunload() {
+    this.runtime.runSync(this.logger.trace('Unloading Little Bot'))
+    await this.runtime.dispose()
 
-    this.logger.trace('Unloading Little Bot')
+    super.onunload()
   }
 
   override onUserEnable() {
-    this.logger.trace('User enabled Little Bot')
+    this.runtime.runFork(this.logger.trace('User enabled Little Bot'))
   }
 
   override async onExternalSettingsChange() {
-    this.logger.trace('External settings changed')
-    await this.settings.load(true)
-  }
-
-  getLogger(settings: LoggerSettings): Logger {
-    return getLogger(settings)
+    this.runtime.runFork(LittleBotSettings.pipe(
+      Effect.tap(() => this.logger.trace('Reloading settings...')),
+      Effect.zip(Effect.promise(() => this.loadData())),
+      Effect.andThen(([settings, data]) => settings.load(data)),
+      Effect.tap((loaded) => this.logger.trace('Reload done', loaded)),
+    ))
   }
 }

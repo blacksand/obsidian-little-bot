@@ -16,9 +16,12 @@
   },
   "dependencies": {
     "effect": "catalog:",
-    "obsidian": "catalog:"
+    "i18next": "catalog:",
+    "obsidian": "catalog:",
+    "remeda": "catalog:"
   },
   "devDependencies": {
+    "@effect/vitest": "catalog:",
     "ts-essentials": "catalog:"
   }
 }

@@ -14,9 +14,9 @@
       "type:api"
     ]
   },
-  "peerDependencies": {},
   "dependencies": {
     "@peaks/core": "workspace:*",
+    "effect": "catalog:",
     "obsidian": "catalog:"
   }
 }

@@ -12,5 +12,3 @@ export { isWhitespace } from './lib/guard/is-whitespace'
 export { isWhitespaceOrNullish } from './lib/guard/is-whitespace-or-nullish'
 
 export type * from './lib/lang/types'
-
-export { getLogger } from './lib/logging/get-logger'

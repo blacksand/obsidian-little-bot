@@ -1,1 +1,1 @@
-export * from './lib/little-bot-settings-impl.js'
+export { LittleBotSettings } from '@peaks/core'

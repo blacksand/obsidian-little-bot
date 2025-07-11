@@ -1,7 +1,8 @@
+import { Effect } from 'effect'
 import type { BackendModule, MultiReadCallback, ReadCallback, Resource, Services } from 'i18next'
 import { mergeDeep } from 'remeda'
 
-import type { LittleBot, Logger, ObsidianApi } from '@peaks/core'
+import type { ObsidianApi } from '@peaks/core'
 import { isObject } from '@peaks/utils'
 
 export interface ObsidianI18nBackendOptions {
@@ -19,17 +20,14 @@ const defaultOptions = {
 export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOptions> {
   readonly type = 'backend'
 
-  private readonly basePath: string
-  private readonly obsidian: ObsidianApi
-  private readonly logger: Logger
+  // private logger: Logger
+
   private options: Required<ObsidianI18nBackendOptions>
 
-  constructor(littleBot: LittleBot) {
-    this.obsidian = littleBot.obsidian
-    this.logger = littleBot.getLogger({ name: '🌏', scope: 'i18n' })
-
+  constructor(readonly obsidian: typeof ObsidianApi.Service) {
     this.options = { ...defaultOptions }
-    this.basePath = this.obsidian.getLittleBotPath()
+
+    // Effect.runSync(Effect.succeed(obsidian.getLittleBotPath()))
   }
 
   init(_: Services, backendOptions: ObsidianI18nBackendOptions): void {
@@ -37,51 +35,45 @@ export class ObsidianI18nBackend implements BackendModule<ObsidianI18nBackendOpt
   }
 
   read(language: string, namespace: string, callback: ReadCallback) {
-    if (!this.basePath) {
-      return callback(new Error('Base path is required'), null)
-    }
+    Effect.runSync(Effect.gen(this, function* () {
+      const basePath = yield* this.obsidian.getLittleBotPath()
 
-    const { loadPath } = this.options
-    const localePath = loadPath.replaceAll('{{lng}}', language).replaceAll('{{ns}}', namespace)
-    const fullPath = `${this.basePath}/${localePath}`
+      const localePath = this.options.loadPath.replaceAll('{{lng}}', language).replaceAll('{{ns}}', namespace)
+      const fullPath = `${basePath}/${localePath}`
 
-    this.obsidian.adapterRead(fullPath).then((data) => {
+      const data = yield* this.obsidian.adapterRead(fullPath)
+
       try {
         const json: unknown = JSON.parse(data)
         callback(null, isObject(json) ? json : null)
       }
-      catch (reason) {
-        this.logger?.error(reason)
-        callback(new Error(`Failed to parse ${fullPath}`), null)
+      catch {
+        // this.logger?.error(reason)
+        callback(new Error(`Invalid file ${fullPath}`), null)
       }
-    }).catch((reason: Error) => {
-      callback(reason, null)
-    })
+    }).pipe(
+      Effect.catchAll((reason: Error) => {
+        callback(reason, null)
+        return Effect.void
+      }),
+    ))
   }
 
   readMulti(languages: readonly string[], namespaces: readonly string[], callback: MultiReadCallback): void {
-    if (!this.basePath) {
-      return callback(new Error('Base path is required'), null)
-    }
-
     const { loadPath } = this.options
-    const promises = languages.flatMap((language) =>
-      namespaces.map(async (namespace) => {
+    const promises = languages.flatMap((language) => namespaces.map((namespace) =>
+      Effect.runPromise(Effect.gen(this, function* () {
+        const basePath = yield* this.obsidian.getLittleBotPath()
+
         const localePath = loadPath.replaceAll('{{lng}}', language).replaceAll('{{ns}}', namespace)
-        const fullPath = `${this.basePath}/${localePath}`
+        const fullPath = `${basePath}/${localePath}`
 
-        try {
-          const data = await this.obsidian.adapterRead(fullPath)
-          const json: unknown = JSON.parse(data)
+        const data = yield* this.obsidian.adapterRead(fullPath)
+        const json: unknown = JSON.parse(data)
 
-          return isObject(json) ? { [language]: { [namespace]: json } } : null
-        }
-        catch (reason) {
-          this.logger?.error(`Failed to parse ${fullPath}`, reason)
-          return null
-        }
-      }),
-    )
+        return isObject(json) ? { [language]: { [namespace]: json } } : null
+      })).catch(() => null),
+    ))
 
     Promise.all(promises).then((resources) => {
       const result: Resource = resources.reduce<Resource>(
