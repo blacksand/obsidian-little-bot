@@ -21,7 +21,7 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/little-bot",
+        "outputPath": "dist/obsidian-little-bot",
         "outfile": "main.js",
         "target": "es2018",
         "declaration": false,
