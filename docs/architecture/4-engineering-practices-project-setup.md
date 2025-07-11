@@ -52,23 +52,23 @@
 
 为了规范化服务定义、实现和依赖注入，我们引入了 **Effect** 库。所有服务都应遵循以下模式：
 
-- **核心原则**: **接口与实现分离**。服务接口在 `@packages/core` 中定义，具体实现在各自的功能包中提供。
+- **核心原则**: **接口与实现分离**。服务接口在 `packages/core` 中定义，具体实现在各自的功能包中提供。
 
 - **实现模式**:
   1. **标准服务 (有依赖或复杂逻辑)**:
-     - **接口定义**: 在 `@packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
+     - **接口定义**: 在 `packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
 
        ```typescript
        // packages/core/src/lib/i18n/i18n-backend.ts
        import { Context } from 'effect'
 
-       export class I18nBackend extends Context.Tag('I18nBackend')<
+       export class I18nBackend extends Context.Tag('@peaks/core/I18nBackend')<
           I18nBackend,
           Effect.Effect<BackendModule>
         >() {}
        ```
 
-     - **实现**: 在具体的功能包中（如 `@packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
+     - **实现**: 在具体的功能包中（如 `packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
 
        ```typescript
        // packages/i18n/src/lib/obsidian-i18n-backend.ts
@@ -90,11 +90,10 @@
        // packages/core/src/lib/logging/logging.ts
        import { Effect } from 'effect'
 
-       export class Logging extends Effect.Tag('@services/Logging')<
-         Logging,
+       export class Logging extends Effect.Service<Logging>()(
+         '@peaks/core/Logging',
          {
-           readonly info: (message: string) => Effect.Effect<void>
-           readonly error: (message: string) => Effect.Effect<void>
-         }
-       >() {}
+           succeed: { getLogger: () => { /* ... implementation */ } },
+         },
+       ) {}
        ```

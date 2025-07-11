@@ -51,7 +51,7 @@ end
 - **组件化架构 (Component-Based Architecture)**: 严格遵循组件化的开发模式，将UI拆分为独立的、可重用的部分。
 
 * **本地优先 (Local-First)**: MVP版本的所有核心UI逻辑和状态管理都将在客户端本地运行。
-* **依赖注入 (Dependency Injection)**: 我们将全面采用 **Effect-TS** (https://effect.website/) 作为依赖注入和副作用管理的核心框架。核心服务将在 `@packages/core` 中通过 `Context.Tag` 定义接口，并在具体的功能包中提供实现，以实现松耦合和高可测试性。
+* **依赖注入 (Dependency Injection)**: 我们将全面采用 **Effect-TS** (https://effect.website/) 作为依赖注入和副作用管理的核心框架。核心服务将在 `packages/core` 中通过 `Context.Tag` 定义接口，并在具体的功能包中提供实现，以实现松耦合和高可测试性。
 
 ## 3. Frontend Tech Stack
 
@@ -122,23 +122,23 @@ end
 
 为了规范化服务定义、实现和依赖注入，我们引入了 **Effect** 库。所有服务都应遵循以下模式：
 
-- **核心原则**: **接口与实现分离**。服务接口在 `@packages/core` 中定义，具体实现在各自的功能包中提供。
+- **核心原则**: **接口与实现分离**。服务接口在 `packages/core` 中定义，具体实现在各自的功能包中提供。
 
 - **实现模式**:
   1. **标准服务 (有依赖或复杂逻辑)**:
-     - **接口定义**: 在 `@packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
+     - **接口定义**: 在 `packages/core` 中，使用 `Context.Tag` 创建一个服务的唯一标识符（Tag）。
 
        ```typescript
        // packages/core/src/lib/i18n/i18n-backend.ts
        import { Context } from 'effect'
 
-       export class I18nBackend extends Context.Tag('I18nBackend')<
+       export class I18nBackend extends Context.Tag('@peaks/core/I18nBackend')<
           I18nBackend,
           Effect.Effect<BackendModule>
         >() {}
        ```
 
-     - **实现**: 在具体的功能包中（如 `@packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
+     - **实现**: 在具体的功能包中（如 `packages/i18n`），创建该接口的实现，并将其提供给一个 `Layer`。
 
        ```typescript
        // packages/i18n/src/lib/obsidian-i18n-backend.ts
@@ -160,13 +160,12 @@ end
        // packages/core/src/lib/logging/logging.ts
        import { Effect } from 'effect'
 
-       export class Logging extends Effect.Tag('@services/Logging')<
-         Logging,
+       export class Logging extends Effect.Service<Logging>()(
+         '@peaks/core/Logging',
          {
-           readonly info: (message: string) => Effect.Effect<void>
-           readonly error: (message: string) => Effect.Effect<void>
-         }
-       >() {}
+           succeed: { getLogger: () => { /* ... implementation */ } },
+         },
+       ) {}
        ```
 
 ## 5. Logging Strategy
