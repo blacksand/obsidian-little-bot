@@ -4,7 +4,7 @@ import type { DeepReadonly } from 'ts-essentials'
 
 import type { ObsidianApp } from '../obsidian/obsidian-app'
 
-export class LittleBot extends Context.Tag('LittleBot')<
+export class LittleBot extends Context.Tag('@peaks/core/LittleBot')<
   LittleBot,
   {
     readonly app: ObsidianApp

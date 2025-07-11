@@ -5,7 +5,7 @@ import { sanitizeSettings } from './sanitized-settings'
 import type { SanitizedSettings } from './sanitized-settings'
 
 export class LittleBotSettings extends Effect.Service<LittleBotSettings>()(
-  'LittleBotSettings',
+  '@peaks/core/LittleBotSettings',
   {
     effect: Effect.gen(function* () {
       const settingsRef = yield* Ref.make<SanitizedSettings | undefined>(undefined)

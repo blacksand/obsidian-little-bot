@@ -3,7 +3,7 @@ import { Context } from 'effect'
 import type { Effect } from 'effect/Effect'
 import type { Plugin } from 'obsidian'
 
-export class ObsidianApi extends Context.Tag('ObsidianApi')<
+export class ObsidianApi extends Context.Tag('@peaks/core/ObsidianApi')<
   ObsidianApi,
   {
     adapterRead: (incomingPath: string) => Effect<string>
