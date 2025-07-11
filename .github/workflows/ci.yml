@@ -45,7 +45,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install chromium --only-shell --with-deps
+        run: pnpm exec playwright install chromium --only-shell
 
       - uses: nrwl/nx-set-shas@v4
 
