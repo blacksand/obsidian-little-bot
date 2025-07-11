@@ -4,12 +4,12 @@
 
 - **核心原则**: **严禁**在最终发布的生产版本代码中包含任何 console.log 调用。
 - **实现方式**:
-  1. 我们将在 packages/utils 中创建一个专用的 logger 模块。
+  1. 我们将在 packages/core 中创建一个专用的 logger 模块。
   2. 该模块将提供多个日志级别，例如 logger.debug(), logger.info(), logger.warn(), logger.error()。
   3. 所有对 console 的调用都将包含在条件块中，该条件块会检查 process.env.NODE_ENV 的值。
 
      ```typescript
-     // packages/utils/logger.ts
+     // packages/core/logging/logger.ts
      export const logger = {
        debug: (message: string, ...args: any[]) => {
          if (process.env.NODE_ENV === 'development') {
