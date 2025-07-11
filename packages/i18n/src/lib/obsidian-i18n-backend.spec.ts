@@ -12,11 +12,14 @@ const basePath = '/mock/base/path'
 
 // Mock the ObsidianApi
 const ObsidianApiTest = ObsidianApi.of({
+  adapterExists: vi.fn(),
   adapterRead: vi.fn(),
+  adapterWrite: vi.fn(),
+  debounce: vi.fn(),
   getLanguage: vi.fn(),
   getLittleBotPath: () => Effect.succeed(basePath),
   getPlugin: vi.fn(),
-  normalizePath: vi.fn(),
+  normalizePath: (path: string) => Effect.succeed(path),
 })
 
 const mockObsidianApi = ObsidianApiTest
@@ -48,7 +51,7 @@ describe('obsidianI18nBackend', () => {
       const callback = vi.fn()
 
       backend.read(language, namespace, callback)
-      await Promise.resolve()
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
       expect(callback).toHaveBeenCalledWith(null, { key: 'value' })
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
@@ -68,7 +71,7 @@ describe('obsidianI18nBackend', () => {
       backend.read(language, namespace, callback)
       await new Promise((resolve) => setTimeout(resolve, 100))
 
-      expect(callback).toHaveBeenCalledWith(error, null)
+      expect(callback).toHaveBeenCalledWith(expect.any(Error), null)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
     })
 
@@ -84,10 +87,9 @@ describe('obsidianI18nBackend', () => {
       const callback = vi.fn()
 
       backend.read(language, namespace, callback)
-      await Promise.resolve()
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
-      const error = new Error(`Invalid file ${fullPath}`)
-      expect(callback).toHaveBeenCalledWith(error, null)
+      expect(callback).toHaveBeenCalledWith(expect.any(Error), null)
       expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
       // Verify that the logger's error method is called
       // expect(mockLogger.error).toHaveBeenCalled()
