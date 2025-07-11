@@ -15,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "@peaks/utils": "workspace:*",
     "effect": "catalog:",
     "i18next": "catalog:",
     "obsidian": "catalog:",
