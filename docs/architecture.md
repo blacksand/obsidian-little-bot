@@ -142,7 +142,7 @@ end
 
        ```typescript
        // packages/i18n/src/lib/obsidian-i18n-backend.ts
-       import { I18nBackend } from '@little-bot/core'
+       import { I18nBackend } from '@peaks/core'
        import { Layer } from 'effect'
 
        export const I18nBackendLive = Layer.succeed(
