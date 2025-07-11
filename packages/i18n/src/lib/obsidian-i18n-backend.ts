@@ -6,13 +6,13 @@ import type { ObsidianApi } from '@peaks/core'
 import { isObject } from '@peaks/utils'
 
 export interface ObsidianI18nBackendOptions {
-  addPath?: string // 相对于插件目录，默认为 'locals/{{lng}}/{{ns}}.missing.json'
-  loadPath?: string // 相对于插件目录，默认为 'locals/{{lng}}/{{ns}}.json'
+  addPath?: string // 相对于插件目录，默认为 'locales/{{lng}}/{{ns}}.missing.json'
+  loadPath?: string // 相对于插件目录，默认为 'locales/{{lng}}/{{ns}}.json'
 }
 
 const defaultOptions = {
-  addPath: 'locals/{{lng}}/{{ns}}.missing.json',
-  loadPath: 'locals/{{lng}}/{{ns}}.json',
+  addPath: 'locales/{{lng}}/{{ns}}.missing.json',
+  loadPath: 'locales/{{lng}}/{{ns}}.json',
 } satisfies ObsidianI18nBackendOptions
 
 /* eslint-disable promise/prefer-await-to-then */

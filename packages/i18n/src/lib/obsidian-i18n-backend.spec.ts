@@ -24,7 +24,7 @@ const mockObsidianApi = ObsidianApiTest
 describe('obsidianI18nBackend', () => {
   let backend: BackendModule<ObsidianI18nBackendOptions>
   const options: ObsidianI18nBackendOptions = {
-    loadPath: 'locals/{{lng}}/{{ns}}.json',
+    loadPath: 'locales/{{lng}}/{{ns}}.json',
   }
 
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('obsidianI18nBackend', () => {
       const language = 'en'
       const namespace = 'translation'
       const mockData = Effect.succeed('{"key": "value"}')
-      const fullPath = `${basePath}/locals/${language}/${namespace}.json`
+      const fullPath = `${basePath}/locales/${language}/${namespace}.json`
 
       // Mock the adapterRead to return valid JSON data
       ;(mockObsidianApi.adapterRead as Mock).mockReturnValue(mockData)
@@ -57,7 +57,7 @@ describe('obsidianI18nBackend', () => {
     it('should handle errors when reading a locale file', async () => {
       const language = 'en'
       const namespace = 'translation'
-      const fullPath = `${basePath}/locals/${language}/${namespace}.json`
+      const fullPath = `${basePath}/locales/${language}/${namespace}.json`
       const error = new Error('File not found')
 
       // Mock the adapterRead to throw an error
@@ -75,7 +75,7 @@ describe('obsidianI18nBackend', () => {
     it('should handle invalid JSON data', async () => {
       const language = 'en'
       const namespace = 'translation'
-      const fullPath = `${basePath}/locals/${language}/${namespace}.json`
+      const fullPath = `${basePath}/locales/${language}/${namespace}.json`
       const mockData = Effect.succeed('{invalid json}')
 
       // Mock the adapterRead to return invalid JSON data
@@ -103,7 +103,7 @@ describe('obsidianI18nBackend', () => {
 
       for (const lang of languages) {
         for (const ns of namespaces) {
-          // const fullPath = `${basePath}/locals/${lang}/${ns}.json`
+          // const fullPath = `${basePath}/locales/${lang}/${ns}.json`
           resources[lang] = { ...resources[lang], [ns]: { key: 'value' } }
           ;(mockObsidianApi.adapterRead as Mock).mockReturnValueOnce(mockData)
         }
@@ -118,7 +118,7 @@ describe('obsidianI18nBackend', () => {
 
       for (const lang of languages) {
         for (const ns of namespaces) {
-          const fullPath = `${basePath}/locals/${lang}/${ns}.json`
+          const fullPath = `${basePath}/locales/${lang}/${ns}.json`
           expect(mockObsidianApi.adapterRead).toHaveBeenCalledWith(fullPath)
         }
       }

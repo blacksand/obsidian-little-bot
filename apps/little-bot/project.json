@@ -13,7 +13,7 @@
       "inputs": [
         "production",
         "^production",
-        "{projectRoot}/src/locals/**/*.json"
+        "{projectRoot}/src/locales/**/*.json"
       ],
       "outputs": [
         "{options.outputPath}"
@@ -40,9 +40,9 @@
             "output": ""
           },
           {
-            "input": "packages/i18n/src/locals",
+            "input": "packages/i18n/src/locales",
             "glob": "**/*.json",
-            "output": "locals"
+            "output": "locales"
           }
         ],
         "esbuildConfig": "apps/little-bot/esbuild.config.cjs"
