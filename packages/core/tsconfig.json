@@ -5,6 +5,9 @@
       "path": "../config-testing"
     },
     {
+      "path": "../utils"
+    },
+    {
       "path": "../config-eslint"
     },
     {
