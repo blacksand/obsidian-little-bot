@@ -3,7 +3,7 @@
   --color-foreground: var(--text-normal);
   --color-card: var(--callout-content-background);
   --color-card-foreground: var(--callout-title-color);
-  --color-popover: var(--background-modifier-active-hover);
+  --color-popover: var(--modal-background);
   --color-popover-foreground: var(--text-normal);
   --color-primary: var(--background-primary-alt);
   --color-primary-foreground: var(--text-normal);
