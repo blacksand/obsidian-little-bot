@@ -6,6 +6,7 @@ import { handleLittleBotCommand } from '@peaks/commands'
 import { Internationalization, LittleBotSettings, Logging } from '@peaks/core'
 import type { LittleBotRuntime, Logger, ObsidianApp } from '@peaks/core'
 
+import './styles/global.css'
 import { makeRuntime } from './runtime/make-runtime'
 
 export default class LittleBotPlugin extends Plugin {

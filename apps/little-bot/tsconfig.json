@@ -23,6 +23,9 @@
       "path": "../../packages/commands"
     },
     {
+      "path": "../../packages/config-tailwind"
+    },
+    {
       "path": "../../packages/config-eslint"
     },
     {

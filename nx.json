@@ -80,6 +80,13 @@
         "^production"
       ]
     },
+    "@nx/vite:build": {
+      "cache": true,
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
     "@nx/vite:test": {
       "cache": true,
       "inputs": [
