@@ -2,6 +2,7 @@ import { Effect } from 'effect'
 import { Plugin } from 'obsidian'
 import type { PluginManifest } from 'obsidian'
 
+import { handleLittleBotCommand } from '@peaks/commands'
 import { Internationalization, LittleBotSettings, Logging } from '@peaks/core'
 import type { LittleBotRuntime, Logger, ObsidianApp } from '@peaks/core'
 
@@ -41,16 +42,15 @@ export default class LittleBotPlugin extends Plugin {
       Effect.tap((t) => this.addCommand({
         id: 'little-bot-command',
         name: t('LittleBotCommand', 'Ask Little Bot...'),
-        callback: () => this.runtime.runSync(Effect.gen(this, function* () {
-          yield* this.logger.trace('Running Little Bot command')
-        })),
+        callback: handleLittleBotCommand(this.app, this.runtime),
+        editorCallback: handleLittleBotCommand(this.app, this.runtime, true),
       })),
     ))
   }
 
   override async onunload() {
     this.runtime.runSync(this.logger.trace('Unload Little Bot'))
-    await this.runtime.dispose()
+    // await this.runtime.dispose()
 
     super.onunload()
   }

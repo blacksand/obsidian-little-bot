@@ -40,6 +40,9 @@
     },
     {
       "path": "./packages/settings"
+    },
+    {
+      "path": "./packages/commands"
     }
   ],
   "files": []

@@ -39,6 +39,10 @@ export function nx({ allowedGlobalImport }: NxOptions = {}): Linter.Config[] {
               },
               {
                 sourceTag: 'type:app',
+                onlyDependOnLibsWithTags: ['type:feature', 'type:api', 'type:ui', 'type:util'],
+              },
+              {
+                sourceTag: 'type:feature',
                 onlyDependOnLibsWithTags: ['type:api', 'type:ui', 'type:util'],
               },
               {

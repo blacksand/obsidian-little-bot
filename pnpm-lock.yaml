@@ -97,7 +97,7 @@ catalogs:
       specifier: ^0.525.0
       version: 0.525.0
     obsidian:
-      specifier: latest
+      specifier: ^1.8.7
       version: 1.8.7
     react:
       specifier: ^18.3.1
@@ -255,6 +255,9 @@ importers:
 
   apps/little-bot:
     dependencies:
+      '@peaks/commands':
+        specifier: workspace:*
+        version: link:../../packages/commands
       '@peaks/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -317,6 +320,34 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.11
+
+  packages/commands:
+    dependencies:
+      '@peaks/core':
+        specifier: workspace:*
+        version: link:../core
+      '@peaks/ui':
+        specifier: workspace:*
+        version: link:../ui
+      '@peaks/utils':
+        specifier: workspace:*
+        version: link:../utils
+      effect:
+        specifier: 'catalog:'
+        version: 3.16.12
+      obsidian:
+        specifier: 'catalog:'
+        version: 1.8.7(@codemirror/state@6.5.2)(@codemirror/view@6.38.0)
+      remeda:
+        specifier: 'catalog:'
+        version: 2.24.0
+    devDependencies:
+      '@effect/vitest':
+        specifier: 'catalog:'
+        version: 0.23.12(effect@3.16.12)(vitest@3.2.4)
+      ts-essentials:
+        specifier: 'catalog:'
+        version: 10.1.1(typescript@5.8.3)
 
   packages/config-eslint:
     dependencies:
