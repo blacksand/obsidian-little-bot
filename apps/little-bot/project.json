@@ -52,12 +52,39 @@
         "production": {}
       }
     },
+    "build-styles": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/obsidian-little-bot/styles.css"
+      ],
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "pnpm --filter little-bot exec tailwindcss --minify={args.minify} --watch={args.watch} --input ./src/styles/global.css --output ../../dist/obsidian-little-bot/styles.css"
+      },
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "continuous": true,
+          "args": ["--minify=false", "--watch=always"]
+        },
+        "production": {
+          "continuous": false,
+          "args": ["--minify=true", "--watch=false"]
+        }
+      }
+    },
     "serve": {
       "continuous": true,
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "dependsOn": [
-        "build"
+        "build",
+        "build-styles"
       ],
       "options": {
         "buildTarget": "@peaks/little-bot:build",
