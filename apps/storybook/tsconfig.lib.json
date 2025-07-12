@@ -19,6 +19,9 @@
       "path": "../../packages/ui/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/config-tailwind/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/config-eslint/tsconfig.lib.json"
     }
   ],

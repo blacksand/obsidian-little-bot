@@ -1,9 +1,13 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@layer theme, base, components, utilities;
 
+@import 'tailwindcss/theme.css' layer(theme) prefix(bs);
+@import 'tailwindcss/utilities.css' layer(utilities) prefix(bs) source(none);
+
+@import 'tw-animate-css';
 @import './base.css';
 
-@source '../../../../packages/ui/src/**';
+@source '../../../../packages/commands/src';
+@source '../../../../packages/ui/src';
 
 @custom-variant dark (&:is(.theme-dark *));
 

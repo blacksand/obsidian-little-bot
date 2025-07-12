@@ -30,10 +30,7 @@
         "typecheck": {
           "targetName": "typecheck"
         }
-      },
-      "exclude": [
-        "tools/peaks-nx/*"
-      ]
+      }
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -50,21 +47,6 @@
         "previewTargetName": "preview",
         "serveStaticTargetName": "serve-static",
         "typecheckTargetName": "typecheck"
-      }
-    },
-    {
-      "plugin": "@nx/js/typescript",
-      "include": [
-        "tools/peaks-nx/*"
-      ],
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.lib.json"
-        }
       }
     },
     {
@@ -93,6 +75,13 @@
       "dependsOn": [
         "^build"
       ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/vite:build": {
+      "cache": true,
       "inputs": [
         "production",
         "^production"
@@ -150,11 +139,6 @@
         "skipPackageJson": true,
         "skipTsConfig": false,
         "useProjectJson": false,
-        "unitTestRunner": "vitest"
-      }
-    },
-    "@nx/react": {
-      "library": {
         "unitTestRunner": "vitest"
       }
     }

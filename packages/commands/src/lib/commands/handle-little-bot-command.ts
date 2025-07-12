@@ -1,6 +1,6 @@
 import type { LittleBotRuntime, ObsidianApp } from '@peaks/core'
 
-import { LittleBotModal } from './little-bot-model'
+import { LittleBotModal } from './little-bot-modal'
 
 export function handleLittleBotCommand(app: ObsidianApp, runtime: LittleBotRuntime, isEditor = false) {
   return () => {

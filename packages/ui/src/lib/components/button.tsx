@@ -7,14 +7,12 @@ import { cn } from '@peaks/ui/utils'
 
 const buttonVariants = cva(
   `
-    focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]
-    aria-invalid:ring-destructive/20 aria-invalid:border-destructive
-    dark:aria-invalid:ring-destructive/40
-    inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium
-    whitespace-nowrap transition-all outline-none
-    disabled:pointer-events-none disabled:opacity-50
-    [&_svg]:pointer-events-none [&_svg]:shrink-0
-    [&_svg:not([class*=\'size-\'])]:size-4
+    bs:inline-flex bs:items-center bs:justify-center bs:gap-2 bs:whitespace-nowrap bs:rounded-md
+    bs:text-sm bs:font-medium bs:transition-all bs:disabled:pointer-events-none
+    bs:disabled:opacity-50 bs:[&_svg]:pointer-events-none bs:[&_svg:not([class*=size-])]:size-4
+    bs:shrink-0 bs:[&_svg]:shrink-0 bs:outline-none bs:focus-visible:border-ring
+    bs:focus-visible:ring-ring/50 bs:focus-visible:ring-[3px] bs:aria-invalid:ring-destructive/20
+    bs:dark:aria-invalid:ring-destructive/40 bs:aria-invalid:border-destructive
   `,
   {
     defaultVariants: {
@@ -23,32 +21,31 @@ const buttonVariants = cva(
     },
     variants: {
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        icon: 'size-9',
-        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
-        sm: 'h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5',
+        default: 'bs:h-9 bs:px-4 bs:py-2 bs:has-[>svg]:px-3',
+        icon: 'bs:size-9',
+        lg: 'bs:h-10 bs:rounded-md bs:px-6 bs:has-[>svg]:px-4',
+        sm: 'bs:h-8 bs:rounded-md bs:gap-1.5 bs:px-3 bs:has-[>svg]:px-2.5',
       },
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-xs hover:bg-primary/90',
+          'bs:bg-primary bs:text-primary-foreground bs:shadow-xs bs:hover:bg-primary/90',
         destructive:
           `
-            bg-destructive text-white shadow-xs
-            hover:bg-destructive/90
-            focus-visible:ring-destructive/20
-            dark:focus-visible:ring-destructive/40 dark:bg-destructive/60
+            bs:bg-destructive bs:text-white bs:shadow-xs bs:hover:bg-destructive/90
+            bs:focus-visible:ring-destructive/20 bs:dark:focus-visible:ring-destructive/40
+            bs:dark:bg-destructive/60
           `,
         ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'bs:hover:bg-accent bs:hover:text-accent-foreground bs:dark:hover:bg-accent/50',
+        link: 'bs:text-primary bs:underline-offset-4 bs:hover:underline',
         outline:
           `
-            bg-background border shadow-xs
-            hover:bg-accent hover:text-accent-foreground
-            dark:border-input
+            bs:border bs:bg-background bs:shadow-xs bs:hover:bg-accent
+            bs:hover:text-accent-foreground bs:dark:bg-input/30 bs:dark:border-input
+            bs:dark:hover:bg-input/50
           `,
         secondary:
-          'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
+          'bs:bg-secondary bs:text-secondary-foreground bs:shadow-xs bs:hover:bg-secondary/80',
       },
     },
   },

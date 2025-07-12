@@ -6,6 +6,7 @@
   "sideEffects": ["./src/**/*.css"],
   "exports": {
     "./package.json": "./package.json",
+    "./base.css": "./src/styles/base.css",
     "./little-bot.css": "./src/styles/little-bot.css",
     "./obsidian.css": "./src/styles/obsidian.css",
     "./storybook.css": "./src/styles/storybook.css"

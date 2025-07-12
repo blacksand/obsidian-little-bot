@@ -10,22 +10,25 @@
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
-  "nx": {
-    "tags": [
-      "scope:shared",
-      "type:feature"
-    ]
-  },
   "dependencies": {
     "@peaks/core": "workspace:*",
     "@peaks/ui": "workspace:*",
     "@peaks/utils": "workspace:*",
     "effect": "catalog:",
+    "lucide-react": "catalog:",
     "obsidian": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "remeda": "catalog:"
   },
   "devDependencies": {
     "@effect/vitest": "catalog:",
     "ts-essentials": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:feature"
+    ]
   }
 }

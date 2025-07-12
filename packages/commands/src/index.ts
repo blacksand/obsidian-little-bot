@@ -1,1 +1,1 @@
-export { handleLittleBotCommand } from './lib/commands/little-bot-command'
+export { handleLittleBotCommand } from './lib/commands/handle-little-bot-command'

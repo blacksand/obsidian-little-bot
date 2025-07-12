@@ -8,15 +8,15 @@
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
+  "dependencies": {
+    "@peaks/core": "workspace:*",
+    "effect": "catalog:",
+    "obsidian": "catalog:"
+  },
   "nx": {
     "tags": [
       "scope:shared",
       "type:api"
     ]
-  },
-  "dependencies": {
-    "@peaks/core": "workspace:*",
-    "effect": "catalog:",
-    "obsidian": "catalog:"
   }
 }

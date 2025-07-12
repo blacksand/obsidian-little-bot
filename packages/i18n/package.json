@@ -8,12 +8,6 @@
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
-  "nx": {
-    "tags": [
-      "scope:shared",
-      "type:util"
-    ]
-  },
   "dependencies": {
     "@peaks/core": "workspace:*",
     "@peaks/utils": "workspace:*",
@@ -21,5 +15,11 @@
     "i18next": "catalog:",
     "obsidian": "catalog:",
     "remeda": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:util"
+    ]
   }
 }

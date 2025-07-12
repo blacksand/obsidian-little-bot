@@ -8,12 +8,6 @@
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
-  "nx": {
-    "tags": [
-      "scope:shared",
-      "type:util"
-    ]
-  },
   "dependencies": {
     "@peaks/utils": "workspace:*",
     "effect": "catalog:",
@@ -24,5 +18,11 @@
   "devDependencies": {
     "@effect/vitest": "catalog:",
     "ts-essentials": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:util"
+    ]
   }
 }
