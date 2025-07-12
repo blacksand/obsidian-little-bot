@@ -19,9 +19,9 @@ export function LittleBotCommand({
   placeholder = 'Type a command or search...',
 }: LittleBotCommandProps) {
   return (
-    <Command className="bs:w-full bs:rounded-lg bs:border bs:shadow-md">
-      <CommandInput placeholder={placeholder} />
-      <CommandList>
+    <Command className="bs:w-full bs:**:border-border">
+      <CommandInput autoFocus placeholder={placeholder} />
+      <CommandList className="bs:mt-2 bs:border-t">
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
           <CommandItem>
