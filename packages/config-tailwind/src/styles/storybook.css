@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+
 @source '../../../../apps/storybook/src/**';
 @source '../../../../packages/ui/src/**';
 
@@ -9,21 +10,29 @@
 @theme inline {
   --color-background: var(--background-primary);
   --color-foreground: var(--text-normal);
+
   --color-card: var(--callout-content-background);
   --color-card-foreground: var(--callout-title-color);
-  --color-popover: var(--background-secondary);
+
+  --color-popover: var(--modal-background);
   --color-popover-foreground: var(--text-normal);
+
   --color-primary: var(--color-base-100);
   --color-primary-foreground: var(--color-base-00);
+
   --color-secondary: var(--color-base-20);
   --color-secondary-foreground: var(--color-base-100);
+
   --color-muted: var(--background-modifier-hover);
   --color-muted-foreground: var(--text-muted);
+
   --color-accent: hsl(var(--color-accent-hsl));
   --color-accent-foreground: var(--text-on-accent);
+
   --color-destructive: var(--background-modifier-error);
   --color-destructive-foreground: var(--text-error);
-  --color-border: var(--background-modifier-border);
+
+  --color-border: var(--modal-border-color);
   --color-input: var(--interactive-normal);
   --color-ring: var(--text-faint);
 }
