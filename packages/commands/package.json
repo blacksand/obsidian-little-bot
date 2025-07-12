@@ -21,7 +21,10 @@
     "@peaks/ui": "workspace:*",
     "@peaks/utils": "workspace:*",
     "effect": "catalog:",
+    "lucide-react": "catalog:",
     "obsidian": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "remeda": "catalog:"
   },
   "devDependencies": {
