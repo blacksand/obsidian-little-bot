@@ -8,12 +8,6 @@
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
-  "nx": {
-    "tags": [
-      "scope:shared",
-      "type:api"
-    ]
-  },
   "dependencies": {
     "@peaks/core": "workspace:*",
     "obsidian": "catalog:",
@@ -21,5 +15,11 @@
   },
   "devDependencies": {
     "ts-essentials": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "scope:shared",
+      "type:api"
+    ]
   }
 }
