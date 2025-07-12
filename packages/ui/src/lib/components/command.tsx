@@ -1,5 +1,4 @@
 import { Command as CommandPrimitive } from 'cmdk'
-import { SearchIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@peaks/ui/utils'
@@ -76,10 +75,10 @@ function CommandInput({
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div
-      className="bs:flex bs:h-9 bs:items-center bs:gap-2 bs:border-b bs:px-3"
+      className="bs:flex bs:h-9 bs:items-center bs:gap-2 bs:px-1"
       data-slot="command-input-wrapper"
     >
-      <SearchIcon className="bs:size-4 bs:shrink-0 bs:opacity-50" />
+      {/* <SearchIcon className="bs:size-4 bs:shrink-0 bs:opacity-50" /> */}
       <CommandPrimitive.Input
         className={cn(
           `
@@ -165,7 +164,9 @@ function CommandItem({
     <CommandPrimitive.Item
       className={cn(
         `
-          bs:data-[selected=true]:bg-accent bs:data-[selected=true]:text-accent-foreground
+          bs:group/item bs:data-[selected=true]:bg-accent
+          bs:data-[selected=true]:text-accent-foreground
+          bs:data-[selected=true]:[&_svg:not([class*=text-])]:text-accent-foreground
           bs:[&_svg:not([class*=text-])]:text-muted-foreground bs:relative bs:flex bs:cursor-default
           bs:items-center bs:gap-2 bs:rounded-sm bs:px-2 bs:py-1.5 bs:text-sm bs:outline-hidden
           bs:select-none bs:data-[disabled=true]:pointer-events-none
@@ -187,7 +188,10 @@ function CommandShortcut({
   return (
     <span
       className={cn(
-        'bs:text-muted-foreground bs:ml-auto bs:text-xs bs:tracking-widest',
+        `
+          bs:text-muted-foreground bs:group-data-[selected=true]/item:text-accent-foreground
+          bs:ml-auto bs:text-xs bs:tracking-widest
+        `,
         className,
       )}
       data-slot="command-shortcut"
