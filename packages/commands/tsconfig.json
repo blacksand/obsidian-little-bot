@@ -8,6 +8,12 @@
       "path": "../utils"
     },
     {
+      "path": "../ui"
+    },
+    {
+      "path": "../core"
+    },
+    {
       "path": "../config-eslint"
     },
     {

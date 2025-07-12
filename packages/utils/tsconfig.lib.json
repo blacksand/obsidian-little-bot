@@ -16,9 +16,6 @@
       "path": "../config-testing/tsconfig.lib.json"
     },
     {
-      "path": "../core/tsconfig.lib.json"
-    },
-    {
       "path": "../config-eslint/tsconfig.lib.json"
     }
   ],

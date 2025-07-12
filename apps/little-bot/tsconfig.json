@@ -20,6 +20,9 @@
       "path": "../../packages/core"
     },
     {
+      "path": "../../packages/commands"
+    },
+    {
       "path": "../../packages/config-eslint"
     },
     {

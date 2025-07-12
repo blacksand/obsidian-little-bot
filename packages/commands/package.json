@@ -1,9 +1,11 @@
 {
-  "name": "@peaks/core",
+  "name": "@peaks/commands",
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "sideEffects": false,
+  "sideEffects": [
+    "./src/**/*.css"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./package.json": "./package.json"
@@ -11,13 +13,14 @@
   "nx": {
     "tags": [
       "scope:shared",
-      "type:util"
+      "type:feature"
     ]
   },
   "dependencies": {
+    "@peaks/core": "workspace:*",
+    "@peaks/ui": "workspace:*",
     "@peaks/utils": "workspace:*",
     "effect": "catalog:",
-    "i18next": "catalog:",
     "obsidian": "catalog:",
     "remeda": "catalog:"
   },

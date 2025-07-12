@@ -32,6 +32,7 @@ export function unicorn(): Linter.Config[] {
         'unicorn/no-nested-ternary': 'off',
         'unicorn/no-null': 'off',
         'unicorn/no-useless-undefined': 'off',
+        'unicorn/prefer-array-flat': 'off',
         'unicorn/prefer-spread': 'off',
         'unicorn/prevent-abbreviations': [
           'error',

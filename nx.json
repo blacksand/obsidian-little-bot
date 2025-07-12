@@ -152,6 +152,11 @@
         "useProjectJson": false,
         "unitTestRunner": "vitest"
       }
+    },
+    "@nx/react": {
+      "library": {
+        "unitTestRunner": "vitest"
+      }
     }
   }
 }

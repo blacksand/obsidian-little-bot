@@ -97,7 +97,7 @@ catalogs:
       specifier: ^0.525.0
       version: 0.525.0
     obsidian:
-      specifier: latest
+      specifier: ^1.8.7
       version: 1.8.7
     react:
       specifier: ^18.3.1
@@ -120,9 +120,6 @@ catalogs:
     ts-essentials:
       specifier: ^10.1.1
       version: 10.1.1
-    tslog:
-      specifier: ^4.9.3
-      version: 4.9.3
     tw-animate-css:
       specifier: ^1.3.5
       version: 1.3.5
@@ -258,6 +255,9 @@ importers:
 
   apps/little-bot:
     dependencies:
+      '@peaks/commands':
+        specifier: workspace:*
+        version: link:../../packages/commands
       '@peaks/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -321,6 +321,34 @@ importers:
         specifier: 'catalog:'
         version: 4.1.11
 
+  packages/commands:
+    dependencies:
+      '@peaks/core':
+        specifier: workspace:*
+        version: link:../core
+      '@peaks/ui':
+        specifier: workspace:*
+        version: link:../ui
+      '@peaks/utils':
+        specifier: workspace:*
+        version: link:../utils
+      effect:
+        specifier: 'catalog:'
+        version: 3.16.12
+      obsidian:
+        specifier: 'catalog:'
+        version: 1.8.7(@codemirror/state@6.5.2)(@codemirror/view@6.38.0)
+      remeda:
+        specifier: 'catalog:'
+        version: 2.24.0
+    devDependencies:
+      '@effect/vitest':
+        specifier: 'catalog:'
+        version: 0.23.12(effect@3.16.12)(vitest@3.2.4)
+      ts-essentials:
+        specifier: 'catalog:'
+        version: 10.1.1(typescript@5.8.3)
+
   packages/config-eslint:
     dependencies:
       '@antfu/eslint-config':
@@ -376,6 +404,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@peaks/utils':
+        specifier: workspace:*
+        version: link:../utils
       effect:
         specifier: 'catalog:'
         version: 3.16.12
@@ -484,15 +515,9 @@ importers:
 
   packages/utils:
     dependencies:
-      '@peaks/core':
-        specifier: workspace:*
-        version: link:../core
       remeda:
         specifier: 'catalog:'
         version: 2.24.0
-      tslog:
-        specifier: 'catalog:'
-        version: 4.9.3
 
   tools/peaks-nx: {}
 
@@ -7326,10 +7351,6 @@ packages:
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
-
-  tslog@4.9.3:
-    resolution: {integrity: sha512-oDWuGVONxhVEBtschLf2cs/Jy8i7h1T+CpdkTNWQgdAF7DhRo2G8vMCgILKe7ojdEkLhICWgI1LYSSKaJsRgcw==}
-    engines: {node: '>=16'}
 
   tsscmp@1.0.6:
     resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
@@ -16205,8 +16226,6 @@ snapshots:
       strip-bom: 3.0.0
 
   tslib@2.8.1: {}
-
-  tslog@4.9.3: {}
 
   tsscmp@1.0.6: {}
 

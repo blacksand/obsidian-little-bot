@@ -36,16 +36,16 @@ export const InternationalizationLive = Layer.effect(
                   saveMissing: isDevelopment,
                   updateMissing: isDevelopment,
 
-                  defaultNS: 'general',
-                  ns: ['general'],
+                  defaultNS: 'translation',
+                  ns: ['translation'],
 
                   fallbackLng: fallbackLanguages,
                   lng: localeFromSetting ?? localeFromApp,
                   supportedLngs: ['en', 'zh', ...(isDevelopment ? ['dev'] : [])],
 
                   backend: {
-                    addPath: 'locals/{{lng}}/{{ns}}.missing.json',
-                    loadPath: 'locals/{{lng}}/{{ns}}.json',
+                    addPath: 'locales/{{lng}}/{{ns}}.missing.json',
+                    loadPath: 'locales/{{lng}}/{{ns}}.json',
                   },
                 }))
           }),

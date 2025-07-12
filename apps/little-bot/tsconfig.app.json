@@ -28,6 +28,9 @@
       "path": "../../packages/core/tsconfig.lib.json"
     },
     {
+      "path": "../../packages/commands/tsconfig.lib.json"
+    },
+    {
       "path": "../../packages/config-eslint/tsconfig.lib.json"
     }
   ],

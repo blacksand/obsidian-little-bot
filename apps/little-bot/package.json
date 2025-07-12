@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@peaks/commands": "workspace:*",
     "@peaks/core": "workspace:*",
     "@peaks/i18n": "workspace:*",
     "@peaks/obsidian": "workspace:*",

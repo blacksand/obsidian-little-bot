@@ -13,7 +13,7 @@
       "inputs": [
         "production",
         "^production",
-        "{projectRoot}/src/locals/**/*.json"
+        "{projectRoot}/src/locales/**/*.json"
       ],
       "outputs": [
         "{options.outputPath}"
@@ -21,7 +21,7 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/little-bot",
+        "outputPath": "dist/obsidian-little-bot",
         "outfile": "main.js",
         "target": "es2018",
         "declaration": false,
@@ -40,9 +40,9 @@
             "output": ""
           },
           {
-            "input": "packages/i18n/src/locals",
+            "input": "packages/i18n/src/locales",
             "glob": "**/*.json",
-            "output": "locals"
+            "output": "locales"
           }
         ],
         "esbuildConfig": "apps/little-bot/esbuild.config.cjs"

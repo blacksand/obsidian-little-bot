@@ -9,9 +9,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@peaks/core": "workspace:*",
-    "remeda": "catalog:",
-    "tslog": "catalog:"
+    "remeda": "catalog:"
   },
   "nx": {
     "tags": [

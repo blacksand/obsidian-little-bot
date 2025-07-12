@@ -74,7 +74,7 @@ end
 
 我们将采用由 **Nx** 编排的 **pnpm monorepo** 结构，以实现最大程度的模块化、可测试性和可维护性。
 
-/obsidian-plugin-little-bot
+/obsidian-little-bot
 |-- /apps
 | |-- /little-bot/ # Obsidian 插件的核心应用
 | |-- /storybook/ # Storybook 应用，用于 UI 组件预览与测试
@@ -142,7 +142,7 @@ end
 
        ```typescript
        // packages/i18n/src/lib/obsidian-i18n-backend.ts
-       import { I18nBackend } from '@little-bot/core'
+       import { I18nBackend } from '@peaks/core'
        import { Layer } from 'effect'
 
        export const I18nBackendLive = Layer.succeed(
