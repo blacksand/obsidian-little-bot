@@ -39,7 +39,7 @@
           "cwd": "{projectRoot}",
           "commands": [
             "shadcn",
-            "nx run ui:lint --fix"
+            "nx lint {projectName} --fix"
           ],
           "parallel": false
         }
