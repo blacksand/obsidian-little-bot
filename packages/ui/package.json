@@ -19,11 +19,14 @@
     "clsx": "catalog:",
     "cmdk": "catalog:",
     "lucide-react": "catalog:",
+    "preact": "catalog:",
     "react": "catalog:",
-    "shadcn": "catalog:",
+    "react-dom": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
+    "@types/react": "catalog:",
+    "shadcn": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:"
   },

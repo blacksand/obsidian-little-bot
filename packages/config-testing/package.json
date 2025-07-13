@@ -15,6 +15,9 @@
     },
     "./package.json": "./package.json"
   },
+  "devDependencies": {
+    "@preact/preset-vite": "catalog:"
+  },
   "nx": {
     "tags": [
       "scope:shared",

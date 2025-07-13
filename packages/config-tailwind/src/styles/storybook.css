@@ -1,12 +1,14 @@
-@import 'tailwindcss';
-
-@source '../../../../apps/storybook/src/**';
-@source '../../../../packages/ui/src/**';
+@import 'tailwindcss' prefix(bs) source(none);
 
 @import 'tw-animate-css';
+@import './base.css';
+
+@source '../../../../apps/storybook/src';
+@source '../../../../packages/commands/src';
+@source '../../../../packages/ui/src';
 
 @custom-variant dark (&:is(.theme-dark *));
-
+/*
 @theme inline {
   --color-background: var(--background-primary);
   --color-foreground: var(--text-normal);
@@ -36,3 +38,4 @@
   --color-input: var(--interactive-normal);
   --color-ring: var(--text-faint);
 }
+*/

@@ -1,6 +1,6 @@
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
-import react from '@vitejs/plugin-react'
+import preact from '@preact/preset-vite'
 import { builtinModules } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -36,6 +36,10 @@ export default defineConfig(async ({ command, mode }) => {
     cacheDir: '../../node_modules/.vite/apps/little-bot',
     publicDir: './src/assets',
     root: projectRoot,
+
+    optimizeDeps: {
+      entries: ['./src/main.ts'],
+    },
 
     build: {
       copyPublicDir: true,
@@ -73,7 +77,7 @@ export default defineConfig(async ({ command, mode }) => {
       },
     },
     plugins: [
-      react(),
+      preact(),
       tailwindcss(),
       nxViteTsPaths(),
       nxCopyAssetsPlugin([

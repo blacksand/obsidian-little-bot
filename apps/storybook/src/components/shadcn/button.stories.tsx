@@ -1,9 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/preact-vite'
 import { expect, fn, within } from 'storybook/test'
 
 import { Button } from '@peaks/ui/components/button'
 
-const meta: Meta<typeof Button> = {
+type ButtonProps = Parameters<typeof Button>[0]
+
+const meta: Meta<ButtonProps> = {
   // title: 'components/shadcn-ui/Button',
   component: Button,
   tags: ['autodocs'],
@@ -21,7 +23,7 @@ const meta: Meta<typeof Button> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<ButtonProps>
 
 export const Primary: Story = {
   args: {
