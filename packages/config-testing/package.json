@@ -16,7 +16,7 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "catalog:"
+    "@preact/preset-vite": "catalog:"
   },
   "nx": {
     "tags": [

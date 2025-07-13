@@ -45,7 +45,6 @@ export class LittleBotModal extends Modal {
     this.root.render(
       <StrictMode>
         <LittleBotCommand />
-        ,
       </StrictMode>,
     )
   }

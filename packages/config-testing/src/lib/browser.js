@@ -1,4 +1,4 @@
-import react from '@vitejs/plugin-react'
+import preact from '@preact/preset-vite'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
@@ -23,7 +23,7 @@ export function testingConfig(configFileUrl) {
     root: projectRoot,
 
     plugins: [
-      react({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
+      preact({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
     ],
 
     test: {

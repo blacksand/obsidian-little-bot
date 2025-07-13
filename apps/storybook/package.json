@@ -8,22 +8,19 @@
   },
   "dependencies": {
     "@peaks/ui": "workspace:*",
+    "@preact/preset-vite": "catalog:",
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "catalog:",
     "@storybook/addon-themes": "catalog:",
     "@storybook/addon-vitest": "catalog:",
-    "@storybook/react-vite": "catalog:",
+    "@storybook/preact-vite": "catalog:",
     "lucide-react": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
+    "preact": "catalog:",
     "storybook": "catalog:"
   },
   "devDependencies": {
     "@peaks/config-tailwind": "workspace:*",
     "@tailwindcss/vite": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
     "tailwindcss": "catalog:"
   },
   "nx": {

@@ -1,6 +1,6 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
-import type { StorybookConfig } from '@storybook/react-vite'
-import react from '@vitejs/plugin-react'
+import preact from '@preact/preset-vite'
+import type { StorybookConfig } from '@storybook/preact-vite'
 import { mergeConfig } from 'vite'
 
 // const uiPackageJson = import.meta.resolve('@peaks/ui/package.json')
@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     disableTelemetry: true,
   },
   framework: {
-    name: '@storybook/react-vite',
+    name: '@storybook/preact-vite',
     options: {},
   },
   stories: [
@@ -19,8 +19,8 @@ const config: StorybookConfig = {
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
   typescript: {
-    // Overrides the default Typescript configuration to allow multi-package components to be documented via Autodocs.
     check: false,
+    // @ts-expect-error docgen
     reactDocgen: 'react-docgen',
   },
 
@@ -36,8 +36,8 @@ const config: StorybookConfig = {
 
     return mergeConfig(viteConfig, {
       plugins: [
-        react(),
         tailwindcss(),
+        preact(),
         nxViteTsPaths(),
       ],
     })

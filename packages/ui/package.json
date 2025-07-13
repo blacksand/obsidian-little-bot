@@ -19,7 +19,9 @@
     "clsx": "catalog:",
     "cmdk": "catalog:",
     "lucide-react": "catalog:",
+    "preact": "catalog:",
     "react": "catalog:",
+    "react-dom": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {

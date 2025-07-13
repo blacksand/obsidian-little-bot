@@ -1,10 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/preact-vite'
 import { Calculator, Calendar, CreditCard, Settings, Smile, User } from 'lucide-react'
-import { action } from 'storybook/actions'
 
 import {
   Command,
-  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -14,38 +12,43 @@ import {
   CommandShortcut,
 } from '@peaks/ui/components/command'
 
+type CommandProps = Parameters<typeof Command>[0]
+
 const meta = {
   // title: 'components/shadcn-ui/Command',
   component: Command,
+  // preact do not supports sub components
   subcomponents: {
-    Command,
-    CommandDialog,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-    CommandShortcut,
+    // CommandEmpty,
+    // CommandGroup,
+    // CommandInput,
+    // CommandItem,
+    // CommandList,
+    // CommandSeparator,
+    // CommandShortcut,
   },
   tags: ['autodocs'],
 
-  // parameters: {
-  //   actions: { argTypesRegex: '^on.*' },
-  // },
   args: {
-    onAbort: action('abort'),
+    // onAbort: fn(),
   },
-} satisfies Meta<typeof Command>
+  argTypes: {
+    label: { control: 'text' },
+    onAbort: { action: 'abort' },
+  },
+  parameters: {
+    actions: { argTypesRegex: '^on.*' },
+  },
+} satisfies Meta<CommandProps>
 
 export default meta
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<CommandProps>
 
-export const Default: Story = {
+export const Primary: Story = {
   render: (args) => (
-    <div className="w-full max-w-[480px] min-w-[350px]">
-      <Command className="w-full rounded-lg border shadow-md" {...args}>
+    <div className="bs:max-w-[90vw] bs:w-sm">
+      <Command className="bs:w-full bs:rounded-lg bs:border bs:shadow-md" {...args}>
         <CommandInput placeholder="Type a command or search..."/>
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
