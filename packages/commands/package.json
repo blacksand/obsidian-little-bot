@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@effect/vitest": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "ts-essentials": "catalog:"
   },
   "nx": {

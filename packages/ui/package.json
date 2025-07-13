@@ -24,6 +24,7 @@
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
+    "@types/react": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:"
   },

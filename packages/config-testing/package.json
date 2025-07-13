@@ -15,6 +15,9 @@
     },
     "./package.json": "./package.json"
   },
+  "devDependencies": {
+    "@vitejs/plugin-react": "catalog:"
+  },
   "nx": {
     "tags": [
       "scope:shared",

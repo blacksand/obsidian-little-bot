@@ -47,6 +47,5 @@ export function testingConfig(configFileUrl) {
       reporters: ['default'],
       server: { deps: { inline: ['@peaks/**'] } },
     },
-
   })
 }
