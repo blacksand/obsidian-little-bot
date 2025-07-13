@@ -20,11 +20,11 @@
     "cmdk": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:",
-    "shadcn": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:",
+    "shadcn": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:"
   },
