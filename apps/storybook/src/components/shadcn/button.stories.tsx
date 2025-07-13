@@ -3,7 +3,7 @@ import { expect, fn, within } from 'storybook/test'
 
 import { Button } from '@peaks/ui/components/button'
 
-const meta: Meta<typeof Button> = {
+const meta = {
   // title: 'components/shadcn-ui/Button',
   component: Button,
   tags: ['autodocs'],
@@ -18,10 +18,10 @@ const meta: Meta<typeof Button> = {
       options: ['default', 'destructive', 'ghost', 'link', 'outline', 'secondary'],
     },
   },
-}
+} satisfies Meta<typeof Button>
 
 export default meta
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
