@@ -1,5 +1,5 @@
 import { Command as CommandPrimitive } from 'cmdk'
-import * as React from 'react'
+import type { ComponentProps } from 'react'
 
 import { cn } from '@peaks/ui/utils'
 
@@ -14,7 +14,7 @@ import {
 function Command({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive>) {
+}: ComponentProps<typeof CommandPrimitive>) {
   return (
     <CommandPrimitive
       className={cn(
@@ -37,7 +37,7 @@ function CommandDialog({
   description = 'Search for a command to run...',
   showCloseButton = true,
   ...props
-}: React.ComponentProps<typeof Dialog> & {
+}: ComponentProps<typeof Dialog> & {
   title?: string
   className?: string
   description?: string
@@ -53,14 +53,15 @@ function CommandDialog({
         className={cn('bs:overflow-hidden bs:p-0', className)}
         showCloseButton={showCloseButton}
       >
-        <Command className={`
-          bs:[&_[cmdk-group-heading]]:text-muted-foreground
-          bs:**:data-[slot=command-input-wrapper]:h-12 bs:[&_[cmdk-group-heading]]:px-2
-          bs:[&_[cmdk-group-heading]]:font-medium bs:[&_[cmdk-group]]:px-2
-          bs:[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 bs:[&_[cmdk-input-wrapper]_svg]:h-5
-          bs:[&_[cmdk-input-wrapper]_svg]:w-5 bs:[&_[cmdk-input]]:h-12 bs:[&_[cmdk-item]]:px-2
-          bs:[&_[cmdk-item]]:py-3 bs:[&_[cmdk-item]_svg]:h-5 bs:[&_[cmdk-item]_svg]:w-5
-        `}
+        <Command
+          className={`
+            bs:[&_[cmdk-group-heading]]:text-muted-foreground
+            bs:**:data-[slot=command-input-wrapper]:h-12 bs:[&_[cmdk-group-heading]]:px-2
+            bs:[&_[cmdk-group-heading]]:font-medium bs:[&_[cmdk-group]]:px-2
+            bs:[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 bs:[&_[cmdk-input-wrapper]_svg]:h-5
+            bs:[&_[cmdk-input-wrapper]_svg]:w-5 bs:[&_[cmdk-input]]:h-12 bs:[&_[cmdk-item]]:px-2
+            bs:[&_[cmdk-item]]:py-3 bs:[&_[cmdk-item]_svg]:h-5 bs:[&_[cmdk-item]_svg]:w-5
+          `}
         >
           {children}
         </Command>
@@ -72,7 +73,7 @@ function CommandDialog({
 function CommandInput({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Input>) {
+}: ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div
       className="bs:flex bs:h-9 bs:items-center bs:gap-2 bs:px-1"
@@ -98,7 +99,7 @@ function CommandInput({
 function CommandList({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.List>) {
+}: ComponentProps<typeof CommandPrimitive.List>) {
   return (
     <CommandPrimitive.List
       className={cn(
@@ -113,7 +114,7 @@ function CommandList({
 
 function CommandEmpty({
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+}: ComponentProps<typeof CommandPrimitive.Empty>) {
   return (
     <CommandPrimitive.Empty
       className="bs:py-6 bs:text-center bs:text-sm"
@@ -126,7 +127,7 @@ function CommandEmpty({
 function CommandGroup({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Group>) {
+}: ComponentProps<typeof CommandPrimitive.Group>) {
   return (
     <CommandPrimitive.Group
       className={cn(
@@ -146,7 +147,7 @@ function CommandGroup({
 function CommandSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Separator>) {
+}: ComponentProps<typeof CommandPrimitive.Separator>) {
   return (
     <CommandPrimitive.Separator
       className={cn('bs:bg-border bs:-mx-1 bs:h-px', className)}
@@ -159,7 +160,7 @@ function CommandSeparator({
 function CommandItem({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+}: ComponentProps<typeof CommandPrimitive.Item>) {
   return (
     <CommandPrimitive.Item
       className={cn(
@@ -184,7 +185,7 @@ function CommandItem({
 function CommandShortcut({
   className,
   ...props
-}: React.ComponentProps<'span'>) {
+}: ComponentProps<'span'>) {
   return (
     <span
       className={cn(
